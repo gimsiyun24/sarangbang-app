@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'app_config.dart';
+import 'core/display_settings.dart';
 import 'router.dart';
 import 'theme.dart';
 
@@ -44,7 +45,7 @@ class _SarangbangAppState extends State<SarangbangApp> {
         debugShowCheckedModeBanner: false,
         theme: buildTheme(),
         routerConfig: _router,
-        builder: (context, child) => MediaQuery.withNoTextScaling(child: child!),
+        builder: (context, child) => _Zoom(child: child!),
       );
 }
 
@@ -127,6 +128,41 @@ class _SetupNeededApp extends StatelessWidget {
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// 설정 화면의 글씨 크기 — 글씨만이 아니라 화면 전체를 확대·축소합니다.
+/// 애기애타의 CSS zoom 과 같은 방식이라 여백·아이콘도 함께 커지고, 보이는 폭은 그만큼 좁아집니다.
+///
+/// 중간(1배)일 때도 같은 모양으로 감쌉니다. 크기를 바꿀 때 감싸는 위젯이 생겼다 없어지면
+/// 그 아래 화면들이 통째로 새로 만들어져 보던 자리를 잃습니다.
+class _Zoom extends ConsumerWidget {
+  final Widget child;
+  const _Zoom({required this.child});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final zoom = ref.watch(textSizeProvider).zoom;
+    final mq = MediaQuery.of(context);
+    return FittedBox(
+      fit: BoxFit.fill,
+      alignment: Alignment.topLeft,
+      child: SizedBox(
+        width: mq.size.width / zoom,
+        height: mq.size.height / zoom,
+        child: MediaQuery(
+          data: mq.copyWith(
+            size: mq.size / zoom,
+            padding: mq.padding / zoom,
+            viewPadding: mq.viewPadding / zoom,
+            viewInsets: mq.viewInsets / zoom,
+            systemGestureInsets: mq.systemGestureInsets / zoom,
+            textScaler: TextScaler.noScaling,
+          ),
+          child: child,
         ),
       ),
     );

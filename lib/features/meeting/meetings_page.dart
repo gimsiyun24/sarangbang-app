@@ -10,6 +10,7 @@ import '../../core/refs.dart';
 import '../../models/models.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
+import '../../widgets/header_actions.dart';
 import '../../widgets/room_switch.dart';
 
 class MeetingsPage extends ConsumerWidget {
@@ -32,10 +33,10 @@ class MeetingsPage extends ConsumerWidget {
               onPressed: () =>
                   openSheet(context, _AttendanceStats(roomId: roomId)),
             ),
-          const Padding(
-            padding: EdgeInsets.only(right: 14),
-            child: Center(child: RoomSwitchChip(compact: true)),
-          ),
+          const Center(child: RoomSwitchChip(compact: true)),
+          const SizedBox(width: 4),
+          const HeaderActions(),
+          const SizedBox(width: 12),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(

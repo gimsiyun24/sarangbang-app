@@ -19,6 +19,9 @@ class Member {
 
   final DateTime? joinedAt, lastSeenAt;
 
+  /// 알림함을 마지막으로 연 시각 — 제목 줄 종의 빨간 점 기준 (core/inbox.dart)
+  final DateTime? noticesSeenAt;
+
   Member({
     required this.uid,
     required this.name,
@@ -29,6 +32,7 @@ class Member {
     this.roomId = '',
     this.joinedAt,
     this.lastSeenAt,
+    this.noticesSeenAt,
   });
 
   factory Member.fromDoc(DocumentSnapshot<Map<String, dynamic>> d) {
@@ -43,6 +47,7 @@ class Member {
       roomId: (m['roomId'] ?? '') as String,
       joinedAt: _dt(m['joinedAt']),
       lastSeenAt: _dt(m['lastSeenAt']),
+      noticesSeenAt: _dt(m['noticesSeenAt']),
     );
   }
 
@@ -218,6 +223,7 @@ String attendLabel(AttendStatus s) => switch (s) {
 class Meeting {
   final String id, title, place, description, albumId, authorUid;
   final DateTime startAt;
+  final DateTime? createdAt;
 
   Meeting({
     required this.id,
@@ -227,6 +233,7 @@ class Meeting {
     this.description = '',
     this.albumId = '',
     this.authorUid = '',
+    this.createdAt,
   });
 
   factory Meeting.fromDoc(DocumentSnapshot<Map<String, dynamic>> d) {
@@ -239,6 +246,7 @@ class Meeting {
       description: (m['description'] ?? '') as String,
       albumId: (m['albumId'] ?? '') as String,
       authorUid: (m['authorUid'] ?? '') as String,
+      createdAt: _dt(m['createdAt']),
     );
   }
 

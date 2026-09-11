@@ -9,6 +9,7 @@ import '../../core/refs.dart';
 import '../../models/models.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
+import '../../widgets/header_actions.dart';
 import '../../widgets/room_switch.dart';
 
 /// 사랑방 채팅. 방마다 하나씩 (분반 / 전체).
@@ -67,10 +68,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       appBar: AppBar(
         title: const Text('채팅'),
         actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 14),
-            child: Center(child: RoomSwitchChip(compact: true)),
-          ),
+          Center(child: RoomSwitchChip(compact: true)),
+          SizedBox(width: 4),
+          HeaderActions(),
+          SizedBox(width: 12),
         ],
       ),
       body: SafeArea(

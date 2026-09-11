@@ -11,6 +11,7 @@ import '../../core/refs.dart';
 import '../../core/week.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
+import '../../widgets/header_actions.dart';
 import '../../widgets/room_switch.dart';
 import '../prayer/prayer_edit_sheet.dart';
 
@@ -48,21 +49,22 @@ class HomePage extends ConsumerWidget {
   }
 }
 
-class _Greeting extends ConsumerWidget {
+class _Greeting extends StatelessWidget {
   final String name;
   const _Greeting({required this.name});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final me = ref.watch(myMemberProvider);
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: Text('$name님', style: AppText.display.copyWith(fontSize: 23)),
         ),
-        GestureDetector(
-          onTap: () => context.go('/more/profile'),
-          child: Avatar(member: me, size: 42, ring: true),
+        // 알림·내 프로필·설정 — 애기애타와 같이 모든 탭 제목 줄 오른쪽에 있습니다.
+        // 맨 오른쪽 단추의 빈 여백만큼 4px 당겨 카드 끝과 맞춥니다.
+        Transform.translate(
+          offset: const Offset(4, 0),
+          child: const HeaderActions(),
         ),
       ],
     );

@@ -10,6 +10,7 @@ import '../../core/week.dart';
 import '../../models/models.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
+import '../../widgets/header_actions.dart';
 import 'kakao_format.dart';
 import 'prayer_edit_sheet.dart';
 
@@ -26,7 +27,11 @@ class PrayerPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('기도'),
-        actions: [_WeekPicker(week: week)],
+        actions: [
+          _WeekPicker(week: week),
+          const HeaderActions(),
+          const SizedBox(width: 12),
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => openPrayerEditor(context, ref, week: week),

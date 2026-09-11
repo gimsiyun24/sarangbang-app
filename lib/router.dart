@@ -15,9 +15,11 @@ import 'features/more/admin_page.dart';
 import 'features/more/members_page.dart';
 import 'features/more/more_page.dart';
 import 'features/more/notices_page.dart';
+import 'features/more/notifications_page.dart';
 import 'features/more/polls_page.dart';
 import 'features/more/profile_page.dart';
 import 'features/more/sermon_notes_page.dart';
+import 'features/more/settings_page.dart';
 import 'features/more/settlements_page.dart';
 import 'features/prayer/prayer_page.dart';
 import 'shell.dart';
@@ -54,6 +56,13 @@ GoRouter buildRouter() {
     },
     routes: [
       GoRoute(path: '/login', builder: (c, s) => const LoginPage()),
+      // 모든 탭 제목 줄의 아이콘(알림·내 프로필·설정)으로 들어오는 화면.
+      // 탭 위로 올라오고(push), 뒤로 가면 원래 있던 탭으로 돌아갑니다.
+      GoRoute(
+          path: '/notifications',
+          builder: (c, s) => const NotificationsPage()),
+      GoRoute(path: '/profile', builder: (c, s) => const ProfilePage()),
+      GoRoute(path: '/settings', builder: (c, s) => const SettingsPage()),
       StatefulShellRoute.indexedStack(
         builder: (c, s, navShell) => AppShell(shell: navShell),
         branches: [

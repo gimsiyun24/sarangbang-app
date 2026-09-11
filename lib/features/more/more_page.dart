@@ -6,6 +6,7 @@ import '../../app_config.dart';
 import '../../core/providers.dart';
 import '../../theme.dart';
 import '../../widgets/common.dart';
+import '../../widgets/header_actions.dart';
 import '../../widgets/room_switch.dart';
 
 class MorePage extends ConsumerWidget {
@@ -25,10 +26,10 @@ class MorePage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('더보기'),
         actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 14),
-            child: Center(child: RoomSwitchChip(compact: true)),
-          ),
+          Center(child: RoomSwitchChip(compact: true)),
+          SizedBox(width: 4),
+          HeaderActions(),
+          SizedBox(width: 12),
         ],
       ),
       body: SafeArea(

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -221,6 +222,25 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
             onPressed: _busy ? null : _save,
             child: Text(_busy ? '저장 중...' : '저장하기'),
           ),
+          const SizedBox(height: 20),
+          // 애기애타 내 프로필과 같이 권한·로그인 계정과 로그아웃을 둡니다.
+          SoftCard(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                _InfoRow('권한', ref.watch(isLeaderProvider) ? '방장' : '멤버',
+                    strong: true),
+                const SizedBox(height: 12),
+                _InfoRow('로그인 계정',
+                    FirebaseAuth.instance.currentUser?.email ?? ''),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          FilledButton(
+            onPressed: signOut,
+            child: const Text('로그아웃'),
+          ),
           const SizedBox(height: 28),
           const Divider(),
           const SizedBox(height: 16),
@@ -267,5 +287,33 @@ class _L extends StatelessWidget {
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
                 color: AppColors.inkSoft)),
+      );
+}
+
+class _InfoRow extends StatelessWidget {
+  final String label, value;
+  final bool strong;
+  const _InfoRow(this.label, this.value, {this.strong = false});
+
+  @override
+  Widget build(BuildContext context) => Row(
+        children: [
+          Text(label,
+              style: AppText.body.copyWith(fontSize: 14, color: AppColors.inkFaint)),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Text(
+              value,
+              textAlign: TextAlign.right,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppText.body.copyWith(
+                fontSize: 14,
+                fontWeight: strong ? FontWeight.w700 : FontWeight.w400,
+                color: strong ? AppColors.ink : AppColors.inkSoft,
+              ),
+            ),
+          ),
+        ],
       );
 }
