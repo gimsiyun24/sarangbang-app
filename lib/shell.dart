@@ -73,8 +73,8 @@ class _FloatingTabBar extends StatefulWidget {
 }
 
 class _FloatingTabBarState extends State<_FloatingTabBar> {
-  /// 탭바 높이 (위아래 여백 4px씩 포함)
-  static const _height = 64.0;
+  /// 탭바 높이 (위아래 여백 4px씩 포함). 애기애타 64px에서 실기에서 보고 3px 높임.
+  static const _height = 67.0;
 
   /// 회색 알약과 탭바 테두리 사이 간격. 사방 모두 이 값입니다.
   static const _barPadding = 4.0;
