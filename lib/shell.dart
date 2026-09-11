@@ -178,7 +178,9 @@ class _FloatingTabBarState extends State<_FloatingTabBar> {
   @override
   Widget build(BuildContext context) {
     // 홈 바가 있는 아이폰에서는 그 위로 띄우고, 없으면 바닥에서 8px 띄웁니다.
-    final bottom = math.max(8.0, MediaQuery.viewPaddingOf(context).bottom - 4);
+    // 끝의 +3 은 실기에서 보고 탭바 전체(알약·아이콘·글씨)를 3px 더 올린 것입니다.
+    final bottom =
+        math.max(8.0, MediaQuery.viewPaddingOf(context).bottom - 4) + 3;
 
     return Padding(
       padding: EdgeInsets.fromLTRB(20, 6, 20, bottom),
