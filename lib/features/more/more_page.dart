@@ -57,8 +57,7 @@ class MorePage extends ConsumerWidget {
                           Text(
                             me == null || me.roomId.isEmpty
                                 ? AppConfig.groupName
-                                : '${AppConfig.roomOf(me.roomId).emoji} '
-                                    '${AppConfig.roomOf(me.roomId).name}',
+                                : AppConfig.roomOf(me.roomId).name,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: AppText.caption,
@@ -79,8 +78,6 @@ class MorePage extends ConsumerWidget {
                 color: AppColors.fill,
                 child: Row(
                   children: [
-                    Text(room.emoji, style: const TextStyle(fontSize: 18)),
-                    const SizedBox(width: 10),
                     Expanded(
                       child: Text(
                         '아래 메뉴는 ${room.name} 기준이에요 · ${roomMembers.length}명',

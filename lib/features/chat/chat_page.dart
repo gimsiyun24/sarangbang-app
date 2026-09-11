@@ -65,7 +65,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${room.emoji} 채팅'),
+        title: const Text('채팅'),
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 14),

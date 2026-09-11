@@ -29,8 +29,6 @@ class RoomSwitchChip extends ConsumerWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(room.emoji, style: const TextStyle(fontSize: 13)),
-            const SizedBox(width: 6),
             Text(
               compact ? room.name.replaceAll('사랑방', '') : room.name,
               style: AppText.label.copyWith(
@@ -55,7 +53,6 @@ class RoomSwitchChip extends ConsumerWidget {
           const SheetHandle('사랑방 이동'),
           for (final r in ref.read(myRoomsProvider)) ...[
             _RoomRow(
-              emoji: r.emoji,
               name: r.name,
               subtitle: r.isAll
                   ? '청년부 전체가 모이는 곳'
@@ -81,12 +78,11 @@ class RoomSwitchChip extends ConsumerWidget {
 }
 
 class _RoomRow extends StatelessWidget {
-  final String emoji, name, subtitle;
+  final String name, subtitle;
   final bool selected;
   final VoidCallback onTap;
 
   const _RoomRow({
-    required this.emoji,
     required this.name,
     required this.subtitle,
     required this.selected,
@@ -108,8 +104,6 @@ class _RoomRow extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Text(emoji, style: const TextStyle(fontSize: 22)),
-              const SizedBox(width: 13),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,7 +132,7 @@ class RoomBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final r = AppConfig.roomOf(roomId);
     return Pill(
-      '${r.emoji} ${r.name}',
+      r.name,
       bg: r.isAll ? AppColors.brand50 : AppColors.fill,
     );
   }

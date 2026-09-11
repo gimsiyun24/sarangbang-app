@@ -355,8 +355,6 @@ class _MeetingEditorState extends ConsumerState<_MeetingEditor> {
                     ),
                     child: Column(
                       children: [
-                        Text(r.emoji, style: const TextStyle(fontSize: 17)),
-                        const SizedBox(height: 4),
                         Text(r.name,
                             style: AppText.label.copyWith(
                               fontSize: 12.5,

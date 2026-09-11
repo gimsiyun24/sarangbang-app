@@ -92,8 +92,6 @@ class _RoomSelectPageState extends ConsumerState<RoomSelectPage> {
                     ),
                     child: Row(
                       children: [
-                        const Text('🍀', style: TextStyle(fontSize: 17)),
-                        const SizedBox(width: 10),
                         Expanded(
                           child: Text(
                             '전체 사랑방에는 자동으로 들어갑니다.\n분반과 전체를 언제든 오갈 수 있어요.',
@@ -156,17 +154,6 @@ class _RoomCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Container(
-              width: 46,
-              height: 46,
-              decoration: BoxDecoration(
-                color: selected ? Colors.white : AppColors.fill,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              alignment: Alignment.center,
-              child: Text(room.emoji, style: const TextStyle(fontSize: 21)),
-            ),
-            const SizedBox(width: 14),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

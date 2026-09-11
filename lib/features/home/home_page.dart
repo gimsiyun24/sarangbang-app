@@ -52,28 +52,13 @@ class _Greeting extends ConsumerWidget {
   final String name;
   const _Greeting({required this.name});
 
-  static String _hello() {
-    final h = DateTime.now().hour;
-    if (h < 6) return '늦은 밤이에요';
-    if (h < 12) return '좋은 아침이에요';
-    if (h < 18) return '좋은 오후예요';
-    return '좋은 저녁이에요';
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final me = ref.watch(myMemberProvider);
     return Row(
       children: [
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(_hello(), style: AppText.caption),
-              const SizedBox(height: 4),
-              Text('$name님 🍀', style: AppText.display.copyWith(fontSize: 23)),
-            ],
-          ),
+          child: Text('$name님', style: AppText.display.copyWith(fontSize: 23)),
         ),
         GestureDetector(
           onTap: () => context.go('/more/profile'),
@@ -154,7 +139,7 @@ class _NextMeetingBanner extends ConsumerWidget {
                           color: Colors.white)),
                 ),
                 const SizedBox(width: 7),
-                Text('${room.emoji} ${room.name}',
+                Text(room.name,
                     style: TextStyle(
                         fontFamily: kFontFamily,
                         fontSize: 11.5,
@@ -495,8 +480,8 @@ class _PinnedNotices extends ConsumerWidget {
                               style: AppText.bodyStrong),
                         ),
                         const SizedBox(width: 6),
-                        Text(AppConfig.roomOf(roomId).emoji,
-                            style: const TextStyle(fontSize: 12)),
+                        Text(AppConfig.roomOf(roomId).name,
+                            style: AppText.micro),
                       ]),
                       const SizedBox(height: 5),
                       Text(n.body,

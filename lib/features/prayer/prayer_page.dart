@@ -165,7 +165,7 @@ class _SubmitBar extends ConsumerWidget {
         children: [
           Row(
             children: [
-              Pill('${room.emoji} ${room.name}'),
+              Pill(room.name),
               const Spacer(),
               Text('${week.mmdd} 제출', style: AppText.caption),
             ],

@@ -11,7 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 /// ============================================================
 /// 사랑방 하나. 분반 사랑방 2개 + 전체 사랑방 1개.
 class SarangRoom {
-  final String id, name, emoji;
+  final String id, name;
 
   /// 전체 사랑방 — 모든 멤버가 자동으로 들어갑니다. 기도제목은 올리지 않습니다.
   final bool isAll;
@@ -19,7 +19,6 @@ class SarangRoom {
   const SarangRoom({
     required this.id,
     required this.name,
-    required this.emoji,
     this.isAll = false,
   });
 }
@@ -39,9 +38,9 @@ class AppConfig {
   /// 이름을 바꾸고 싶으면 여기만 고치면 됩니다. `id` 는 절대 바꾸지 마세요
   /// (id 가 Firestore 경로라, 바꾸면 기존 기록이 안 보입니다).
   static const List<SarangRoom> rooms = [
-    SarangRoom(id: 'hj', name: '희진사랑방', emoji: '🌿'),
-    SarangRoom(id: 'pg', name: '평강사랑방', emoji: '🌷'),
-    SarangRoom(id: 'all', name: '전체 사랑방', emoji: '🍀', isAll: true),
+    SarangRoom(id: 'hj', name: '희진사랑방'),
+    SarangRoom(id: 'pg', name: '평강사랑방'),
+    SarangRoom(id: 'all', name: '전체 사랑방', isAll: true),
   ];
 
   static const String allRoomId = 'all';
