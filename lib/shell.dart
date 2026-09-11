@@ -220,17 +220,15 @@ class SubPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text(title, overflow: TextOverflow.ellipsis),
-          titleSpacing: 4,
-          leadingWidth: 50,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 6),
-            child: IconButton(
-              icon: const Icon(Icons.chevron_left_rounded,
-                  size: 32, color: AppColors.ink),
-              onPressed: () => context.canPop()
-                  ? context.pop()
-                  : context.go(fallbackRoute ?? '/more'),
-            ),
+          // 애기애타처럼 화살표는 화면 끝에서 12px쯤, 제목은 56px에서 시작합니다.
+          titleSpacing: 0,
+          leadingWidth: 56,
+          leading: IconButton(
+            icon: const Icon(Icons.chevron_left_rounded,
+                size: 30, color: AppColors.ink),
+            onPressed: () => context.canPop()
+                ? context.pop()
+                : context.go(fallbackRoute ?? '/more'),
           ),
           actions: [...?actions, const SizedBox(width: 6)],
         ),
