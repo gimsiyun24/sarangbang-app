@@ -1,19 +1,18 @@
-# Netlify 설정
-# 방법 A(추천): 로컬에서 `flutter build web --release` 후 build/web 폴더를 드래그앤드롭
-# 방법 B: GitHub 연동 자동 빌드 — 아래 build 명령이 Flutter SDK를 내려받아 빌드합니다.
+# Netlify 설정 — GitHub 연동 자동 배포
+#
+#   main 브랜치에 push  →  Netlify 가 이 파일을 읽고 build.sh 실행  →  사이트 갱신
+#
+# 대시보드에서 따로 건드릴 설정은 없습니다. 빌드를 고치려면 이 파일과 build.sh 만 고치세요.
 
 [build]
   publish = "build/web"
-  command = """
-    if [ ! -d "$HOME/flutter" ]; then
-      git clone https://github.com/flutter/flutter.git -b stable --depth 1 $HOME/flutter;
-    fi
-    export PATH="$HOME/flutter/bin:$PATH"
-    flutter config --no-analytics
-    flutter pub get
-    flutter build web --release
-  """
+  command = "bash build.sh"
 
+[build.environment]
+  # Flutter 버전 — 내 PC 에 깔린 버전과 맞춰두세요 (flutter --version)
+  FLUTTER_VERSION = "3.44.8"
+
+# SPA: 새로고침이나 /prayer 같은 주소 직접 입력이 404 나지 않게 전부 index.html 로 넘깁니다.
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -25,3 +24,5 @@
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    # ⚠️ Cross-Origin-Opener-Policy 는 넣지 마세요.
+    #    구글 로그인 팝업(signInWithPopup)이 막혀서 로그인이 안 됩니다.

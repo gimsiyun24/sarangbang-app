@@ -87,3 +87,33 @@ flutter test
 ```bash
 flutter build web --release
 ```
+
+---
+
+## 함께 개발하기
+
+저장소는 GitHub(비공개), 배포는 Netlify 입니다.
+**`main` 에 push 하면 2~5분 뒤 사이트에 자동 반영**됩니다. 따로 올릴 파일은 없습니다.
+
+```bash
+git clone <저장소 주소>
+cd sarangbang_app
+flutter pub get
+flutter run -d chrome
+```
+
+고친 다음에는
+
+```bash
+git pull                              # 먼저 상대가 고친 걸 받아옵니다
+git add -A && git commit -m "무엇을 고쳤는지"
+git push                              # → Netlify 가 알아서 빌드·배포
+```
+
+**알아둘 것**
+
+- Flutter **3.44.8** (Dart 3.12.2) 기준입니다. 빌드 버전은 `netlify.toml` 의 `FLUTTER_VERSION` 에 있고, 내 PC 버전과 맞춰두는 게 좋습니다.
+- 설정값은 `lib/app_config.dart` 한 파일에만 있습니다. 거기 Firebase·Cloudinary 값은 브라우저에 노출돼도 되는 값이고, 실제 보안은 `firestore.rules` 가 담당합니다.
+- **`firestore.rules` 는 push 해도 반영되지 않습니다.** 고쳤으면 Firebase 콘솔 → Firestore → 규칙에 붙여넣고 "게시"를 눌러야 합니다.
+- 배포 주소를 새로 만들면 **Firebase Authentication → Settings → 승인된 도메인**에 그 주소를 추가해야 구글 로그인이 됩니다.
+- 같은 파일을 동시에 고치면 충돌합니다. 큰 작업은 시작 전에 서로 알려주세요.
