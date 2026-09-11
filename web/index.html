@@ -26,23 +26,30 @@
        CDN @font-face 는 CanvasKit 렌더러가 부분적으로만 가져가서
        한글 일부가 □ 로 깨집니다. 그래서 여기서는 불러오지 않습니다. -->
 
-  <!-- 바탕·글씨 색은 lib/theme.dart 의 AppColors.canvas / brand / inkFaint 와 맞춥니다.
-       어긋나면 앱이 뜨는 순간 첫 화면 색만 튑니다. -->
+  <!-- 로딩 화면 — 애기애타 앱처럼 흰 바탕 가운데에 로고 하나만 둡니다.
+       로고는 한 번만 부드럽게 떠오릅니다. 계속 움직이면 오히려 오래 기다린 것처럼 느껴집니다.
+       html·body 바탕은 lib/theme.dart 의 AppColors.canvas 와 맞춥니다 (로딩 화면이 걷힌 뒤 보이는 색). -->
   <style>
     html, body { margin: 0; padding: 0; height: 100%; background: #ECEDEE; }
     #boot {
-      position: fixed; inset: 0; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 14px;
-      font-family: -apple-system, 'Malgun Gothic', sans-serif;
-      color: #2088C8; background: #ECEDEE; transition: opacity .3s;
+      position: fixed; inset: 0; display: flex;
+      align-items: center; justify-content: center;
+      background: #FFFFFF; transition: opacity .3s;
     }
-    #boot .leaf { font-size: 40px; animation: pulse 1.4s ease-in-out infinite; }
-    #boot .txt { font-size: 14px; color: #A8A29E; }
-    @keyframes pulse { 0%,100% { transform: scale(1); opacity: .7 } 50% { transform: scale(1.15); opacity: 1 } }
+    #boot .logo {
+      width: 132px; height: auto;
+      animation: splash-in .5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    #boot .sr-only {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap;
+    }
+    @keyframes splash-in { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+    @media (prefers-reduced-motion: reduce) { #boot .logo { animation: none } }
   </style>
 </head>
 <body>
-  <div id="boot"><div class="leaf">🍀</div><div class="txt">사랑방을 여는 중...</div></div>
+  <div id="boot"><img class="logo" src="splash-logo.png" alt="NewWave"><span class="sr-only">사랑방을 여는 중이에요</span></div>
   <script>
     window.addEventListener('flutter-first-frame', function () {
       var b = document.getElementById('boot');
