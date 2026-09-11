@@ -33,12 +33,17 @@ class PrayerPage extends ConsumerWidget {
           const SizedBox(width: 12),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => openPrayerEditor(context, ref, week: week),
-        icon: const AppIcon(AppIcons.pencil),
-        label: const Text('내 기도제목 쓰기'),
+      // 유리 탭바 위로 올려 둡니다.
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
+        child: FloatingActionButton.extended(
+          onPressed: () => openPrayerEditor(context, ref, week: week),
+          icon: const AppIcon(AppIcons.pencil),
+          label: const Text('내 기도제목 쓰기'),
+        ),
       ),
       body: SafeArea(
+        bottom: false,
         child: Bounded(child: _WeekView(week: week, room: myRoom)),
       ),
     );
@@ -113,7 +118,7 @@ class _WeekView extends ConsumerWidget {
             .where((e) => e.all.isNotEmpty || e.routines.isNotEmpty)
             .toList();
         return ListView(
-          padding: const EdgeInsets.fromLTRB(16, 10, 16, 96),
+          padding: EdgeInsets.fromLTRB(16, 10, 16, 96 + MediaQuery.paddingOf(context).bottom),
           children: [
             _SubmitBar(
               week: week,

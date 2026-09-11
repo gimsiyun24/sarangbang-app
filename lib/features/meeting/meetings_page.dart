@@ -40,12 +40,17 @@ class MeetingsPage extends ConsumerWidget {
           const SizedBox(width: 12),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => openMeetingEditor(context, ref),
-        icon: const AppIcon(AppIcons.plus),
-        label: const Text('일정 등록'),
+      // 유리 탭바 위로 올려 둡니다.
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
+        child: FloatingActionButton.extended(
+          onPressed: () => openMeetingEditor(context, ref),
+          icon: const AppIcon(AppIcons.plus),
+          label: const Text('일정 등록'),
+        ),
       ),
       body: SafeArea(
+        bottom: false,
         child: Bounded(
           child: async.when(
             loading: () => const ListSkeleton(),
@@ -65,7 +70,8 @@ class MeetingsPage extends ConsumerWidget {
               final past = list.where((m) => !m.isUpcoming).toList();
 
               return ListView(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
+                padding:
+                    EdgeInsets.fromLTRB(16, 8, 16, 96 + MediaQuery.paddingOf(context).bottom),
                 children: [
                   if (upcoming.isNotEmpty) ...[
                     const SectionTitle('다가오는 일정'),

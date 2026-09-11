@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../models/models.dart';
 import '../theme.dart';
+import 'glass.dart';
 import 'app_icon.dart';
 import 'app_icons.dart';
 
@@ -420,15 +421,22 @@ Future<T?> openSheet<T>(BuildContext context, Widget child) =>
       isScrollControlled: true,
       useSafeArea: true,
       barrierColor: AppColors.ink.withValues(alpha: 0.4),
+      // 시트 자체가 유리입니다 — 뒤 화면이 비칩니다(widgets/glass.dart).
+      backgroundColor: Colors.transparent,
+      elevation: 0,
       builder: (c) => Padding(
         padding: EdgeInsets.only(bottom: MediaQuery.of(c).viewInsets.bottom),
-        child: SafeArea(
-          top: false,
-          child: Bounded(
-            max: 480,
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(24, 12, 24, 28),
-              child: child,
+        child: GlassSurface(
+          borderRadius:
+              const BorderRadius.vertical(top: Radius.circular(AppRadius.lg)),
+          child: SafeArea(
+            top: false,
+            child: Bounded(
+              max: 480,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(24, 12, 24, 28),
+                child: child,
+              ),
             ),
           ),
         ),

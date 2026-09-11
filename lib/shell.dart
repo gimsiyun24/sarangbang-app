@@ -10,6 +10,7 @@ import 'features/auth/profile_setup_page.dart';
 import 'features/auth/room_select_page.dart';
 import 'theme.dart';
 import 'widgets/common.dart';
+import 'widgets/glass.dart';
 import 'widgets/push_sync.dart';
 
 class AppShell extends ConsumerWidget {
@@ -37,6 +38,8 @@ class AppShell extends ConsumerWidget {
     }
 
     return Scaffold(
+      // 내용이 유리 탭바 아래로 지나가게 합니다. 그래서 각 탭 화면은 아래 여백을 탭바 높이만큼 더 둡니다.
+      extendBody: true,
       body: PushSync(child: shell),
       bottomNavigationBar: _FloatingTabBar(
         currentIndex: shell.currentIndex,
@@ -174,15 +177,11 @@ class _FloatingTabBarState extends State<_FloatingTabBar> {
         heightFactor: 1,
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 520),
-          child: Container(
+          child: GlassSurface(
             height: _height,
+            borderRadius: BorderRadius.circular(AppRadius.pill),
             padding: const EdgeInsets.symmetric(
                 vertical: _barPadding, horizontal: _barPadding + _pillBleed),
-            decoration: BoxDecoration(
-              color: AppColors.surface.withValues(alpha: 0.75),
-              borderRadius: BorderRadius.circular(AppRadius.pill),
-              boxShadow: AppShadow.float,
-            ),
             child: LayoutBuilder(
               builder: (context, constraints) {
                 final count = _tabs.length;

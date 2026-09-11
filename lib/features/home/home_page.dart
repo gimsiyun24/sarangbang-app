@@ -22,9 +22,11 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: Bounded(
           child: ListView(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 36),
+            // 아래 여백에 탭바 높이를 더해, 맨 끝까지 내려도 마지막 줄이 유리 탭바에 가리지 않게 합니다.
+            padding: EdgeInsets.fromLTRB(16, 8, 16, 36 + MediaQuery.paddingOf(context).bottom),
             children: [
               const _HomeTitle(),
               const SizedBox(height: 14),
