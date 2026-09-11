@@ -1,0 +1,27 @@
+# Netlify 설정
+# 방법 A(추천): 로컬에서 `flutter build web --release` 후 build/web 폴더를 드래그앤드롭
+# 방법 B: GitHub 연동 자동 빌드 — 아래 build 명령이 Flutter SDK를 내려받아 빌드합니다.
+
+[build]
+  publish = "build/web"
+  command = """
+    if [ ! -d "$HOME/flutter" ]; then
+      git clone https://github.com/flutter/flutter.git -b stable --depth 1 $HOME/flutter;
+    fi
+    export PATH="$HOME/flutter/bin:$PATH"
+    flutter config --no-analytics
+    flutter pub get
+    flutter build web --release
+  """
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

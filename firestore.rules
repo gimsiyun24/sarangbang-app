@@ -1,0 +1,155 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 승인 절차 없음 — Google 로그인한 사람 = 멤버
+    function signedIn() {
+      return request.auth != null;
+    }
+    function isMe(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+    // 문서에 기록된 작성자가 나인가
+    function isAuthor() {
+      return signedIn() && resource.data.authorUid == request.auth.uid;
+    }
+    function willBeAuthor() {
+      return signedIn() && request.resource.data.authorUid == request.auth.uid;
+    }
+
+    match /groups/{gid} {
+      allow read: if signedIn();
+      allow write: if false;              // 청년부 정보는 콘솔에서만 수정
+
+      // ── 프로필 (청년부 공통) ─────────────────────────
+      match /members/{uid} {
+        allow read: if signedIn();
+        allow create, update: if isMe(uid);
+        allow delete: if isMe(uid);
+
+        // 생일 롤링페이퍼 — 누구나 남기고, 쓴 사람만 지움
+        match /birthdayCards/{year}/messages/{mid} {
+          allow read: if signedIn();
+          allow create: if willBeAuthor();
+          allow update, delete: if isAuthor();
+        }
+      }
+
+      // ── 사랑방 (희진 / 평강 / 전체) ───────────────────
+      match /rooms/{roomId} {
+        allow read: if signedIn();
+        allow create, update: if signedIn();   // 방 문서는 앱이 필요할 때 만듭니다
+        allow delete: if false;
+
+        // 주차 / 기도제목 — 분반 사랑방에서만 씁니다
+        match /weeks/{wid} {
+          allow read: if signedIn();
+          allow create, update: if signedIn();
+          allow delete: if false;
+
+          // 공개 문서 — 본인만 쓰기, 공개된 것만 남이 읽기
+          match /prayers/{uid} {
+            allow read: if isMe(uid)
+                        || (signedIn() && resource.data.visibility == 'all');
+            allow create, update: if isMe(uid);
+            allow delete: if isMe(uid);
+
+            // ⭐ "나만 보기" 항목 — 본인 외 아무도 읽을 수 없음
+            match /private/{pid} {
+              allow read, write: if isMe(uid);
+            }
+          }
+        }
+
+        // 🙏 기도했어요 — 기도제목 문서는 본인만 쓸 수 있어 반응은 별도 컬렉션
+        match /prayerReactions/{rid} {
+          allow read: if signedIn();
+          allow create: if signedIn()
+                        && request.resource.data.uid == request.auth.uid;
+          allow update: if false;
+          allow delete: if signedIn()
+                        && resource.data.uid == request.auth.uid;
+        }
+
+        // 신앙루틴 체크 — 본인 것만
+        match /routineLogs/{logId} {
+          allow read: if signedIn();
+          allow create, update: if signedIn()
+                                && request.resource.data.uid == request.auth.uid;
+          allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+        }
+
+        // 💬 채팅 — 보낸 사람만 쓰고 지울 수 있음. 수정은 불가
+        match /messages/{mid} {
+          allow read: if signedIn();
+          allow create: if signedIn()
+                        && request.resource.data.uid == request.auth.uid
+                        && request.resource.data.text is string
+                        && request.resource.data.text.size() > 0
+                        && request.resource.data.text.size() <= 2000;
+          allow update: if false;
+          allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+        }
+
+        // 모임 / 출석
+        match /meetings/{mid} {
+          allow read: if signedIn();
+          allow create, update: if signedIn();
+          allow delete: if isAuthor();
+
+          match /attendance/{uid} {
+            allow read: if signedIn();
+            allow write: if isMe(uid);     // 출석은 본인만 체크
+          }
+        }
+
+        // 앨범 / 사진
+        match /albums/{aid} {
+          allow read: if signedIn();
+          allow create, update: if signedIn();
+          allow delete: if isAuthor();
+
+          match /photos/{pid} {
+            allow read: if signedIn();
+            allow create: if signedIn()
+                          && request.resource.data.uploaderUid == request.auth.uid;
+            allow update: if signedIn();                        // 좋아요 / 숨김
+            allow delete: if signedIn()
+                          && resource.data.uploaderUid == request.auth.uid;
+          }
+        }
+
+        // 공지
+        match /notices/{nid} {
+          allow read: if signedIn();
+          allow create: if willBeAuthor();
+          allow update: if signedIn();                          // 읽음 표시
+          allow delete: if isAuthor();
+        }
+
+        // 투표
+        match /polls/{pid} {
+          allow read: if signedIn();
+          allow create: if willBeAuthor();
+          allow update: if signedIn();                          // 투표하기
+          allow delete: if isAuthor();
+        }
+
+        // 정산
+        match /settlements/{sid} {
+          allow read: if signedIn();
+          allow create: if willBeAuthor();
+          allow update: if signedIn();                          // 입금완료 체크
+          allow delete: if isAuthor();
+        }
+
+        // 말씀 노트
+        match /sermonNotes/{nid} {
+          allow read: if signedIn();
+          allow create: if willBeAuthor();
+          allow update, delete: if isAuthor();
+        }
+      }
+    }
+  }
+}
