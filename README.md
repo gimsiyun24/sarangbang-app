@@ -93,6 +93,7 @@ flutter build web --release
 ## 함께 개발하기
 
 저장소는 GitHub(비공개), 배포는 Netlify 입니다.
+Claude Code 같은 AI 도구로 작업한다면 **[CLAUDE.md](CLAUDE.md)** 를 먼저 보세요 — 구조·관습·주의사항이 거기 정리돼 있고, Claude Code 는 이 파일을 자동으로 읽습니다.
 **`main` 에 push 하면 2~5분 뒤 사이트에 자동 반영**됩니다. 따로 올릴 파일은 없습니다.
 
 ```bash
