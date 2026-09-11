@@ -26,20 +26,20 @@
        CDN @font-face 는 CanvasKit 렌더러가 부분적으로만 가져가서
        한글 일부가 □ 로 깨집니다. 그래서 여기서는 불러오지 않습니다. -->
 
-  <!-- 로딩 화면 — 애기애타 앱처럼 흰 바탕 가운데에 로고 하나만 둡니다.
-       로고는 한 번만 부드럽게 떠오릅니다. 계속 움직이면 오히려 오래 기다린 것처럼 느껴집니다.
-       html·body 바탕은 lib/theme.dart 의 AppColors.canvas 와 맞춥니다 (로딩 화면이 걷힌 뒤 보이는 색). -->
+  <!-- 로딩 화면 — 탭 화면과 같은 회색 바탕(lib/theme.dart 의 AppColors.canvas) 가운데에 로고 하나만 둡니다.
+       바탕이 같은 색이라 로딩 화면이 걷힐 때 색이 튀지 않습니다.
+       로고는 한 번만 부드럽게 떠오릅니다. 계속 움직이면 오히려 오래 기다린 것처럼 느껴집니다. -->
   <style>
     html, body { margin: 0; padding: 0; height: 100%; background: #ECEDEE; }
     #boot {
       position: fixed; inset: 0; display: flex;
       align-items: center; justify-content: center;
-      background: #FFFFFF; transition: opacity .3s;
+      background: #ECEDEE; transition: opacity .3s;
     }
     #boot .logo {
       width: 132px; height: auto;
-      /* 가운데에서 오른쪽 10px, 위로 7px. 떠오르는 애니메이션이 transform 을 쓰므로 위치는 relative 로 옮깁니다. */
-      position: relative; left: 10px; top: -7px;
+      /* 가운데에서 오른쪽 20px, 위로 7px. 떠오르는 애니메이션이 transform 을 쓰므로 위치는 relative 로 옮깁니다. */
+      position: relative; left: 20px; top: -7px;
       animation: splash-in .5s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
     #boot .sr-only {
