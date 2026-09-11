@@ -156,7 +156,7 @@ class _AlbumDetailPageState extends ConsumerState<AlbumDetailPage> {
                 title: const Text('원본 그대로 올리기',
                     style: TextStyle(fontSize: 13)),
                 subtitle: const Text('끄면 긴 변 2560px으로 줄여서 올립니다',
-                    style: TextStyle(fontSize: 11.5, color: AppColors.muted)),
+                    style: TextStyle(fontSize: 11.5, color: AppColors.inkMuted)),
               ),
             ),
           if (_uploading)
@@ -169,13 +169,13 @@ class _AlbumDetailPageState extends ConsumerState<AlbumDetailPage> {
                     child: LinearProgressIndicator(
                       value: _total == 0 ? null : _done / _total,
                       minHeight: 6,
-                      backgroundColor: const Color(0xFFEDF3F0),
+                      backgroundColor: AppColors.fill,
                     ),
                   ),
                   const SizedBox(height: 6),
                   Text('$_done / $_total 장 올리는 중...',
                       style: const TextStyle(
-                          fontSize: 12, color: AppColors.muted)),
+                          fontSize: 12, color: AppColors.inkMuted)),
                 ],
               ),
             ),
@@ -211,7 +211,7 @@ class _AlbumDetailPageState extends ConsumerState<AlbumDetailPage> {
                             Cloudinary.thumb(list[i].publicId),
                             fit: BoxFit.cover,
                             errorBuilder: (a, b, c) =>
-                                Container(color: AppColors.mint),
+                                Container(color: AppColors.brand50),
                           ),
                         ),
                         if (list[i].likes.isNotEmpty)

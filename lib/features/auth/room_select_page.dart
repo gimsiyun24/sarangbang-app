@@ -57,7 +57,7 @@ class _RoomSelectPageState extends ConsumerState<RoomSelectPage> {
                       width: 68,
                       height: 68,
                       decoration: BoxDecoration(
-                        color: AppColors.mintSoft,
+                        color: AppColors.fill,
                         borderRadius: BorderRadius.circular(22),
                       ),
                       alignment: Alignment.center,
@@ -69,7 +69,7 @@ class _RoomSelectPageState extends ConsumerState<RoomSelectPage> {
                       style: AppText.display),
                   const SizedBox(height: 8),
                   Text('기도제목과 신앙루틴은 여기서 나눠요.',
-                      style: AppText.body.copyWith(color: AppColors.muted)),
+                      style: AppText.body.copyWith(color: AppColors.inkMuted)),
                   const SizedBox(height: 26),
 
                   for (final r in AppConfig.classRooms) ...[
@@ -87,7 +87,7 @@ class _RoomSelectPageState extends ConsumerState<RoomSelectPage> {
                   Container(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: AppColors.mintSoft,
+                      color: AppColors.fill,
                       borderRadius: BorderRadius.circular(AppRadius.md),
                     ),
                     child: Row(
@@ -146,10 +146,10 @@ class _RoomCard extends StatelessWidget {
         duration: const Duration(milliseconds: 160),
         padding: const EdgeInsets.all(17),
         decoration: BoxDecoration(
-          color: selected ? AppColors.mint : Colors.white,
+          color: selected ? AppColors.brand50 : Colors.white,
           borderRadius: BorderRadius.circular(AppRadius.lg),
           border: Border.all(
-            color: selected ? AppColors.seed : AppColors.line,
+            color: selected ? AppColors.brand : AppColors.line,
             width: selected ? 1.8 : 1,
           ),
           boxShadow: selected ? null : AppShadow.card,
@@ -160,7 +160,7 @@ class _RoomCard extends StatelessWidget {
               width: 46,
               height: 46,
               decoration: BoxDecoration(
-                color: selected ? Colors.white : AppColors.mintSoft,
+                color: selected ? Colors.white : AppColors.fill,
                 borderRadius: BorderRadius.circular(15),
               ),
               alignment: Alignment.center,
@@ -184,7 +184,7 @@ class _RoomCard extends StatelessWidget {
               duration: const Duration(milliseconds: 160),
               opacity: selected ? 1 : 0,
               child: const Icon(Icons.check_circle_rounded,
-                  color: AppColors.deep, size: 22),
+                  color: AppColors.brand, size: 22),
             ),
           ],
         ),

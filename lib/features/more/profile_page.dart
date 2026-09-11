@@ -109,7 +109,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                     child: Container(
                       padding: const EdgeInsets.all(7),
                       decoration: BoxDecoration(
-                        color: AppColors.deep,
+                        color: AppColors.brand,
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white, width: 2),
                       ),
@@ -179,12 +179,12 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                       padding: const EdgeInsets.symmetric(vertical: 13),
                       decoration: BoxDecoration(
                         color: _roomId == r.id
-                            ? AppColors.mint
-                            : AppColors.mintSoft,
+                            ? AppColors.brand50
+                            : AppColors.fill,
                         borderRadius: BorderRadius.circular(AppRadius.md),
                         border: Border.all(
                           color: _roomId == r.id
-                              ? AppColors.seed
+                              ? AppColors.brand
                               : Colors.transparent,
                           width: 1.6,
                         ),
@@ -197,8 +197,8 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                               style: AppText.label.copyWith(
                                 fontSize: 12.5,
                                 color: _roomId == r.id
-                                    ? AppColors.deep
-                                    : AppColors.muted,
+                                    ? AppColors.brand
+                                    : AppColors.inkMuted,
                               )),
                         ],
                       ),
@@ -230,7 +230,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
             '표시 이름 기준: ${AppConfig.preferNickname ? '별칭 우선' : '실명 우선'}\n'
             '(lib/app_config.dart 의 preferNickname 으로 바꿀 수 있어요)',
             style: const TextStyle(
-                fontSize: 11.5, color: AppColors.muted, height: 1.6),
+                fontSize: 11.5, color: AppColors.inkMuted, height: 1.6),
           ),
           const SizedBox(height: 20),
           Center(
@@ -247,7 +247,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                 await Refs.member(ref.read(myUidProvider)!).delete();
                 await signOut();
               },
-              style: TextButton.styleFrom(foregroundColor: AppColors.warn),
+              style: TextButton.styleFrom(foregroundColor: AppColors.danger),
               child: const Text('사랑방 나가기 / 데이터 삭제',
                   style: TextStyle(fontSize: 12.5)),
             ),
@@ -268,6 +268,6 @@ class _L extends StatelessWidget {
             style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF41544B))),
+                color: AppColors.inkSoft)),
       );
 }

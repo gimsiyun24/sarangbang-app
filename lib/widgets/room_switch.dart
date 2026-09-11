@@ -22,7 +22,7 @@ class RoomSwitchChip extends ConsumerWidget {
       child: Container(
         padding: EdgeInsets.fromLTRB(11, 7, rooms.length < 2 ? 12 : 7, 7),
         decoration: BoxDecoration(
-          color: room.isAll ? AppColors.mint : AppColors.mintSoft,
+          color: room.isAll ? AppColors.brand50 : AppColors.fill,
           borderRadius: BorderRadius.circular(AppRadius.pill),
           border: Border.all(color: AppColors.line),
         ),
@@ -34,11 +34,11 @@ class RoomSwitchChip extends ConsumerWidget {
             Text(
               compact ? room.name.replaceAll('사랑방', '') : room.name,
               style: AppText.label.copyWith(
-                  fontSize: 13, color: AppColors.deep),
+                  fontSize: 13, color: AppColors.brand),
             ),
             if (rooms.length >= 2)
               const Icon(Icons.unfold_more_rounded,
-                  size: 15, color: AppColors.deep),
+                  size: 15, color: AppColors.brand),
           ],
         ),
       ),
@@ -100,10 +100,10 @@ class _RoomRow extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: selected ? AppColors.mint : AppColors.mintSoft,
+            color: selected ? AppColors.brand50 : AppColors.fill,
             borderRadius: BorderRadius.circular(AppRadius.lg),
             border: Border.all(
-                color: selected ? AppColors.seed : Colors.transparent,
+                color: selected ? AppColors.brand : Colors.transparent,
                 width: 1.6),
           ),
           child: Row(
@@ -122,7 +122,7 @@ class _RoomRow extends StatelessWidget {
               ),
               if (selected)
                 const Icon(Icons.check_circle_rounded,
-                    color: AppColors.deep, size: 21),
+                    color: AppColors.brand, size: 21),
             ],
           ),
         ),
@@ -139,7 +139,7 @@ class RoomBadge extends StatelessWidget {
     final r = AppConfig.roomOf(roomId);
     return Pill(
       '${r.emoji} ${r.name}',
-      bg: r.isAll ? AppColors.mint : AppColors.mintSoft,
+      bg: r.isAll ? AppColors.brand50 : AppColors.fill,
     );
   }
 }

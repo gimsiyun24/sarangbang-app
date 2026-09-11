@@ -84,7 +84,7 @@ class MeetingDetailPage extends ConsumerWidget {
                     style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.deep)),
+                        color: AppColors.brand)),
                 if (meeting.place.isNotEmpty) ...[
                   const SizedBox(height: 8),
                   KV('장소', meeting.place),
@@ -126,7 +126,7 @@ class MeetingDetailPage extends ConsumerWidget {
                     alignment: Alignment.centerLeft,
                     child: Text('사유: ${att[uid]!['reason']}',
                         style: const TextStyle(
-                            fontSize: 12.5, color: AppColors.muted)),
+                            fontSize: 12.5, color: AppColors.inkMuted)),
                   ),
                 ],
               ],
@@ -136,7 +136,7 @@ class MeetingDetailPage extends ConsumerWidget {
               trailing: Text(
                   '${att.values.where((v) => v['status'] == 'present').length}명 참석',
                   style: const TextStyle(
-                      fontSize: 12.5, color: AppColors.muted))),
+                      fontSize: 12.5, color: AppColors.inkMuted))),
           SoftCard(
             child: Column(
               children: [
@@ -223,10 +223,10 @@ class _StatusButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (emoji, color) = switch (status) {
-      AttendStatus.present => ('✅', AppColors.seed),
-      AttendStatus.online => ('💻', const Color(0xFF6E93D6)),
-      AttendStatus.absent => ('🥲', const Color(0xFFB6A99A)),
-      AttendStatus.none => ('⬜', AppColors.muted),
+      AttendStatus.present => ('✅', AppColors.brand),
+      AttendStatus.online => ('💻', AppColors.violet),
+      AttendStatus.absent => ('🥲', AppColors.inkFaint),
+      AttendStatus.none => ('⬜', AppColors.inkMuted),
     };
     return InkWell(
       onTap: onTap,
@@ -234,10 +234,10 @@ class _StatusButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
-          color: selected ? color.withValues(alpha: 0.12) : const Color(0xFFF8FBF9),
+          color: selected ? color.withValues(alpha: 0.12) : AppColors.fill,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-              color: selected ? color : const Color(0xFFE6EEE9),
+              color: selected ? color : AppColors.line,
               width: selected ? 1.6 : 1),
         ),
         child: Column(
@@ -248,7 +248,7 @@ class _StatusButton extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w700,
-                    color: selected ? color : AppColors.muted)),
+                    color: selected ? color : AppColors.inkMuted)),
           ],
         ),
       ),
@@ -280,7 +280,7 @@ class _StatusGroup extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 12.5,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.muted)),
+                  color: AppColors.inkMuted)),
           const SizedBox(height: 8),
           Wrap(
             spacing: 6,

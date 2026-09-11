@@ -103,7 +103,7 @@ class _NextMeetingBanner extends ConsumerWidget {
                 width: 42,
                 height: 42,
                 decoration: BoxDecoration(
-                  color: AppColors.mintSoft,
+                  color: AppColors.fill,
                   borderRadius: BorderRadius.circular(13),
                 ),
                 alignment: Alignment.center,
@@ -115,7 +115,7 @@ class _NextMeetingBanner extends ConsumerWidget {
                     style: AppText.body.copyWith(fontSize: 13.5)),
               ),
               const Icon(Icons.chevron_right_rounded,
-                  color: AppColors.faint, size: 20),
+                  color: AppColors.inkFaint, size: 20),
             ],
           ),
         ),
@@ -131,11 +131,7 @@ class _NextMeetingBanner extends ConsumerWidget {
       padding: const EdgeInsets.only(bottom: 12),
       child: SoftCard(
         padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF3E9C74), AppColors.deeper],
-        ),
+        color: AppColors.brand,
         onTap: () => context.go('/meetings/$roomId/${m.id}'),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -300,7 +296,7 @@ class _RoutineCard extends ConsumerWidget {
           '오늘의 신앙루틴',
           trailing: streak > 0
               ? Pill('🔥 $streak일 연속',
-                  bg: const Color(0xFFFFF2E7), fg: const Color(0xFFCB7738))
+                  bg: AppColors.goldBg, fg: AppColors.gold)
               : null,
         ),
         SoftCard(
@@ -385,10 +381,10 @@ class _RoutineRow extends StatelessWidget {
                 height: 23,
                 margin: const EdgeInsets.only(top: 1),
                 decoration: BoxDecoration(
-                  color: checked ? AppColors.seed : Colors.white,
+                  color: checked ? AppColors.brand : Colors.white,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                      color: checked ? AppColors.seed : const Color(0xFFD8E5DE),
+                      color: checked ? AppColors.brand : AppColors.lineStrong,
                       width: 1.7),
                 ),
                 child: checked
@@ -403,10 +399,10 @@ class _RoutineRow extends StatelessWidget {
                   style: AppText.body.copyWith(
                     fontSize: 14,
                     fontWeight: checked ? FontWeight.w500 : FontWeight.w600,
-                    color: checked ? AppColors.faint : AppColors.ink2,
+                    color: checked ? AppColors.inkFaint : AppColors.inkSoft,
                     decoration:
                         checked ? TextDecoration.lineThrough : TextDecoration.none,
-                    decorationColor: AppColors.faint,
+                    decorationColor: AppColors.inkFaint,
                   ),
                   child: Text(text),
                 ),
@@ -554,7 +550,7 @@ class _RecentPhotos extends ConsumerWidget {
                         fit: BoxFit.cover,
                         height: 96,
                         errorBuilder: (a, b, c) =>
-                            Container(color: AppColors.mint),
+                            Container(color: AppColors.brand50),
                       ),
                     ),
                   ),

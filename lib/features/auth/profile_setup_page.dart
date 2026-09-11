@@ -73,7 +73,7 @@ class _ProfileSetupPageState extends ConsumerState<ProfileSetupPage> {
                       width: 68,
                       height: 68,
                       decoration: BoxDecoration(
-                        color: AppColors.mintSoft,
+                        color: AppColors.fill,
                         borderRadius: BorderRadius.circular(22),
                       ),
                       alignment: Alignment.center,
@@ -84,7 +84,7 @@ class _ProfileSetupPageState extends ConsumerState<ProfileSetupPage> {
                   Text('반가워요!', style: AppText.display),
                   const SizedBox(height: 7),
                   Text('이것만 알려주시면 바로 시작합니다.',
-                      style: AppText.body.copyWith(color: AppColors.muted)),
+                      style: AppText.body.copyWith(color: AppColors.inkMuted)),
                   const SizedBox(height: 30),
                   const _Label('이름'),
                   TextField(

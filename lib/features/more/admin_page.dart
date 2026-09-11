@@ -104,7 +104,7 @@ class AdminPage extends ConsumerWidget {
                   '초대코드는 Firebase 콘솔 → groups/nw2026 문서의 joinCode 필드를\n'
                   '채우면 켜지고, 비우면 꺼집니다. (앱 재배포 불필요)',
                   style: TextStyle(
-                      fontSize: 11.5, color: AppColors.muted, height: 1.6),
+                      fontSize: 11.5, color: AppColors.inkMuted, height: 1.6),
                 ),
               ],
             ),
@@ -136,7 +136,7 @@ class AdminPage extends ConsumerWidget {
             '외부 유입이 신경 쓰이면 초대코드를 켜주세요.',
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 11.5, color: AppColors.muted, height: 1.7),
+                fontSize: 11.5, color: AppColors.inkMuted, height: 1.7),
           ),
         ],
       ),
@@ -153,7 +153,7 @@ class _Check extends StatelessWidget {
   Widget build(BuildContext context) => Row(
         children: [
           Icon(ok ? Icons.check_circle_rounded : Icons.error_outline_rounded,
-              size: 17, color: ok ? AppColors.seed : AppColors.warn),
+              size: 17, color: ok ? AppColors.brand : AppColors.danger),
           const SizedBox(width: 8),
           Text(label,
               style: const TextStyle(
@@ -162,7 +162,7 @@ class _Check extends StatelessWidget {
           Flexible(
             child: Text(value.isEmpty ? '미설정' : value,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 12, color: AppColors.muted)),
+                style: const TextStyle(fontSize: 12, color: AppColors.inkMuted)),
           ),
         ],
       );

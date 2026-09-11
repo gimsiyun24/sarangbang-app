@@ -106,8 +106,8 @@ class _PollCard extends ConsumerWidget {
           Row(
             children: [
               Pill(poll.isOver ? '종료' : '진행 중',
-                  bg: poll.isOver ? const Color(0xFFF0F4F2) : AppColors.mint,
-                  fg: poll.isOver ? AppColors.muted : AppColors.deep),
+                  bg: poll.isOver ? AppColors.fill : AppColors.brand50,
+                  fg: poll.isOver ? AppColors.inkMuted : AppColors.brand),
               if (poll.multi) ...[
                 const SizedBox(width: 6),
                 const Pill('복수 선택'),
@@ -117,7 +117,7 @@ class _PollCard extends ConsumerWidget {
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
                   icon: const Icon(Icons.more_horiz_rounded,
-                      size: 18, color: AppColors.muted),
+                      size: 18, color: AppColors.inkMuted),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                   onSelected: (v) async {
@@ -148,7 +148,7 @@ class _PollCard extends ConsumerWidget {
             const SizedBox(height: 4),
             Text(
                 '마감 ${DateFormat('M/d (E) a h:mm', 'ko_KR').format(poll.closesAt!)}',
-                style: const TextStyle(fontSize: 11.5, color: AppColors.muted)),
+                style: const TextStyle(fontSize: 11.5, color: AppColors.inkMuted)),
           ],
           const SizedBox(height: 14),
           for (final o in poll.options) ...[
@@ -167,7 +167,7 @@ class _PollCard extends ConsumerWidget {
             children: [
               Text('${poll.voters.length}명 참여',
                   style: const TextStyle(
-                      fontSize: 12, color: AppColors.muted)),
+                      fontSize: 12, color: AppColors.inkMuted)),
               const Spacer(),
               TextButton.icon(
                 onPressed: () => copyToClipboard(
@@ -224,7 +224,7 @@ class _OptionBar extends StatelessWidget {
           Container(
             height: 46,
             decoration: BoxDecoration(
-              color: const Color(0xFFF3F7F5),
+              color: AppColors.fill,
               borderRadius: BorderRadius.circular(14),
             ),
           ),
@@ -235,8 +235,8 @@ class _OptionBar extends StatelessWidget {
               height: 46,
               decoration: BoxDecoration(
                 color: mine
-                    ? AppColors.seed.withValues(alpha: 0.28)
-                    : AppColors.mint,
+                    ? AppColors.brand.withValues(alpha: 0.28)
+                    : AppColors.brand50,
                 borderRadius: BorderRadius.circular(14),
               ),
             ),
@@ -252,7 +252,7 @@ class _OptionBar extends StatelessWidget {
                         ? Icons.check_circle_rounded
                         : Icons.radio_button_unchecked_rounded,
                     size: 17,
-                    color: mine ? AppColors.deep : const Color(0xFFC4D3CB),
+                    color: mine ? AppColors.brand : AppColors.lineStrong,
                   ),
                   const SizedBox(width: 8),
                   Expanded(
@@ -269,7 +269,7 @@ class _OptionBar extends StatelessWidget {
                           .take(3)
                           .join(','),
                       style: const TextStyle(
-                          fontSize: 10.5, color: AppColors.muted),
+                          fontSize: 10.5, color: AppColors.inkMuted),
                     ),
                     const SizedBox(width: 6),
                   ],
@@ -277,7 +277,7 @@ class _OptionBar extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w800,
-                          color: AppColors.deep)),
+                          color: AppColors.brand)),
                 ],
               ),
             ),
@@ -414,7 +414,7 @@ class _PollEditorState extends ConsumerState<_PollEditor> {
                     : DateFormat('M월 d일 (E) a h:mm', 'ko_KR').format(_closesAt!),
                 style: TextStyle(
                     fontSize: 14,
-                    color: _closesAt == null ? AppColors.muted : null),
+                    color: _closesAt == null ? AppColors.inkMuted : null),
               ),
             ),
           ),

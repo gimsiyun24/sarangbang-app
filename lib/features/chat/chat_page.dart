@@ -176,7 +176,7 @@ class _Bubble extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
           decoration: BoxDecoration(
-            color: isMine ? AppColors.deep : Colors.white,
+            color: isMine ? AppColors.brand : Colors.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(isMine || !showHeader ? 16 : 4),
               topRight: Radius.circular(isMine && showHeader ? 4 : 16),
@@ -190,7 +190,7 @@ class _Bubble extends StatelessWidget {
             style: AppText.body.copyWith(
               fontSize: 14,
               height: 1.5,
-              color: isMine ? Colors.white : AppColors.ink2,
+              color: isMine ? Colors.white : AppColors.inkSoft,
             ),
           ),
         ),
@@ -216,11 +216,11 @@ class _Bubble extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                 decoration: BoxDecoration(
-                  color: AppColors.mint,
+                  color: AppColors.brand50,
                   borderRadius: BorderRadius.circular(AppRadius.pill),
                 ),
                 child: Text(dateDivider!,
-                    style: AppText.micro.copyWith(color: AppColors.deep)),
+                    style: AppText.micro.copyWith(color: AppColors.brand)),
               ),
             ),
           ),
@@ -289,7 +289,7 @@ class _Composer extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
         decoration: const BoxDecoration(
           color: Colors.white,
-          border: Border(top: BorderSide(color: AppColors.lineSoft)),
+          border: Border(top: BorderSide(color: AppColors.line)),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -304,7 +304,7 @@ class _Composer extends StatelessWidget {
                 onSubmitted: (_) => onSend(),
                 decoration: InputDecoration(
                   hintText: hint,
-                  fillColor: AppColors.mintSoft,
+                  fillColor: AppColors.fill,
                   contentPadding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   border: OutlineInputBorder(
@@ -317,7 +317,7 @@ class _Composer extends StatelessWidget {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(AppRadius.pill),
-                    borderSide: const BorderSide(color: AppColors.seed, width: 1.4),
+                    borderSide: const BorderSide(color: AppColors.brand, width: 1.4),
                   ),
                 ),
               ),

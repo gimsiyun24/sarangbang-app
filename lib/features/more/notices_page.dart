@@ -106,7 +106,7 @@ class _NoticeCardState extends ConsumerState<_NoticeCard> {
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
                   icon: const Icon(Icons.more_horiz_rounded,
-                      size: 18, color: AppColors.muted),
+                      size: 18, color: AppColors.inkMuted),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                   onSelected: (v) async {
@@ -140,22 +140,22 @@ class _NoticeCardState extends ConsumerState<_NoticeCard> {
             children: [
               Text(map[n.authorUid]?.display ?? '',
                   style: const TextStyle(
-                      fontSize: 11.5, color: AppColors.muted)),
+                      fontSize: 11.5, color: AppColors.inkMuted)),
               if (n.createdAt != null) ...[
                 const Text(' · ',
-                    style: TextStyle(fontSize: 11.5, color: AppColors.muted)),
+                    style: TextStyle(fontSize: 11.5, color: AppColors.inkMuted)),
                 Text(DateFormat('M/d HH:mm').format(n.createdAt!),
                     style: const TextStyle(
-                        fontSize: 11.5, color: AppColors.muted)),
+                        fontSize: 11.5, color: AppColors.inkMuted)),
               ],
               const Spacer(),
               Pill('읽음 ${n.readBy.length}/${members.length}',
                   bg: unreadMembers.isEmpty
-                      ? AppColors.mint
-                      : const Color(0xFFFDF0E8),
+                      ? AppColors.brand50
+                      : AppColors.goldBg,
                   fg: unreadMembers.isEmpty
-                      ? AppColors.deep
-                      : const Color(0xFFC0733F)),
+                      ? AppColors.brand
+                      : AppColors.gold),
             ],
           ),
           const SizedBox(height: 10),
@@ -299,7 +299,7 @@ class _NoticeEditorState extends ConsumerState<_NoticeEditor> {
             onChanged: (v) => setState(() => _pinned = v),
             title: const Text('상단에 고정', style: TextStyle(fontSize: 13.5)),
             subtitle: const Text('홈 화면에도 표시됩니다',
-                style: TextStyle(fontSize: 11.5, color: AppColors.muted)),
+                style: TextStyle(fontSize: 11.5, color: AppColors.inkMuted)),
           ),
           const SizedBox(height: 12),
           FilledButton(

@@ -124,12 +124,12 @@ class _NoteCard extends ConsumerWidget {
               const SizedBox(width: 6),
               Text(author?.display ?? '',
                   style:
-                      const TextStyle(fontSize: 11.5, color: AppColors.muted)),
+                      const TextStyle(fontSize: 11.5, color: AppColors.inkMuted)),
               if (note.authorUid == uid)
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
                   icon: const Icon(Icons.more_horiz_rounded,
-                      size: 18, color: AppColors.muted),
+                      size: 18, color: AppColors.inkMuted),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                   onSelected: (v) async {
@@ -157,7 +157,7 @@ class _NoteCard extends ConsumerWidget {
             Text(note.scripture,
                 style: const TextStyle(
                     fontSize: 12.5,
-                    color: AppColors.deep,
+                    color: AppColors.brand,
                     fontWeight: FontWeight.w600)),
           ],
           if (note.summary.isNotEmpty) ...[
@@ -201,7 +201,7 @@ class _NoteDetail extends StatelessWidget {
             Avatar(member: author, size: 22),
             const SizedBox(width: 6),
             Text(author?.display ?? '',
-                style: const TextStyle(fontSize: 12, color: AppColors.muted)),
+                style: const TextStyle(fontSize: 12, color: AppColors.inkMuted)),
           ]),
           if (note.scripture.isNotEmpty) ...[
             const SizedBox(height: 16),
@@ -209,14 +209,14 @@ class _NoteDetail extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: AppColors.mint,
+                color: AppColors.brand50,
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Text(note.scripture,
                   style: const TextStyle(
                       fontSize: 13.5,
                       height: 1.7,
-                      color: AppColors.deep,
+                      color: AppColors.brand,
                       fontWeight: FontWeight.w600)),
             ),
           ],
@@ -255,7 +255,7 @@ class _NoteHead extends StatelessWidget {
             style: const TextStyle(
                 fontSize: 12.5,
                 fontWeight: FontWeight.w800,
-                color: AppColors.muted)),
+                color: AppColors.inkMuted)),
       );
 }
 

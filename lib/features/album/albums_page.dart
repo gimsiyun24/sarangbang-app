@@ -30,7 +30,7 @@ class AlbumsPage extends ConsumerWidget {
             padding: EdgeInsets.only(right: 4),
             child: Center(
                 child: Pill('Cloudinary 미설정',
-                    bg: AppColors.warnBg, fg: AppColors.warn)),
+                    bg: AppColors.dangerBg, fg: AppColors.danger)),
           ),
         const Padding(
           padding: EdgeInsets.only(right: 8),
@@ -92,7 +92,7 @@ class _AlbumTile extends StatelessWidget {
             children: [
               if (album.coverPublicId.isEmpty)
                 Container(
-                  color: AppColors.mint,
+                  color: AppColors.brand50,
                   alignment: Alignment.center,
                   child: const Text('🍀', style: TextStyle(fontSize: 30)),
                 )
@@ -100,7 +100,7 @@ class _AlbumTile extends StatelessWidget {
                 Image.network(
                   Cloudinary.thumb(album.coverPublicId, size: 600),
                   fit: BoxFit.cover,
-                  errorBuilder: (a, b, c) => Container(color: AppColors.mint),
+                  errorBuilder: (a, b, c) => Container(color: AppColors.brand50),
                 ),
 
               // 아래쪽 글자가 읽히도록 그라데이션

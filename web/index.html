@@ -19,23 +19,25 @@
   <link rel="icon" type="image/png" href="favicon.png"/>
 
   <title>사랑방 나눔</title>
-  <meta name="theme-color" content="#4CAF82">
+  <meta name="theme-color" content="#2088C8">
   <link rel="manifest" href="manifest.json">
 
   <!-- Pretendard 는 pubspec 에 번들되어 있습니다 (assets/fonts).
        CDN @font-face 는 CanvasKit 렌더러가 부분적으로만 가져가서
        한글 일부가 □ 로 깨집니다. 그래서 여기서는 불러오지 않습니다. -->
 
+  <!-- 바탕·글씨 색은 lib/theme.dart 의 AppColors.canvas / brand / inkFaint 와 맞춥니다.
+       어긋나면 앱이 뜨는 순간 첫 화면 색만 튑니다. -->
   <style>
-    html, body { margin: 0; padding: 0; height: 100%; background: #F6FAF7; }
+    html, body { margin: 0; padding: 0; height: 100%; background: #ECEDEE; }
     #boot {
       position: fixed; inset: 0; display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 14px;
       font-family: -apple-system, 'Malgun Gothic', sans-serif;
-      color: #4CAF82; background: #F6FAF7; transition: opacity .3s;
+      color: #2088C8; background: #ECEDEE; transition: opacity .3s;
     }
     #boot .leaf { font-size: 40px; animation: pulse 1.4s ease-in-out infinite; }
-    #boot .txt { font-size: 14px; color: #7A8C82; }
+    #boot .txt { font-size: 14px; color: #A8A29E; }
     @keyframes pulse { 0%,100% { transform: scale(1); opacity: .7 } 50% { transform: scale(1.15); opacity: 1 } }
   </style>
 </head>

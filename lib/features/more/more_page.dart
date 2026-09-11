@@ -67,7 +67,7 @@ class MorePage extends ConsumerWidget {
                       ),
                     ),
                     const Icon(Icons.chevron_right_rounded,
-                        color: AppColors.faint),
+                        color: AppColors.inkFaint),
                   ],
                 ),
               ),
@@ -76,7 +76,7 @@ class MorePage extends ConsumerWidget {
               const SizedBox(height: 12),
               SoftCard(
                 flat: true,
-                color: AppColors.mintSoft,
+                color: AppColors.fill,
                 child: Row(
                   children: [
                     Text(room.emoji, style: const TextStyle(fontSize: 18)),
@@ -123,7 +123,7 @@ class MorePage extends ConsumerWidget {
                   },
                   icon: const Icon(Icons.logout_rounded, size: 16),
                   label: const Text('로그아웃'),
-                  style: TextButton.styleFrom(foregroundColor: AppColors.muted),
+                  style: TextButton.styleFrom(foregroundColor: AppColors.inkMuted),
                 ),
               ),
               const SizedBox(height: 8),
@@ -173,7 +173,7 @@ class _MenuCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 7, vertical: 2),
                           decoration: BoxDecoration(
-                            color: AppColors.warn,
+                            color: AppColors.danger,
                             borderRadius: BorderRadius.circular(AppRadius.pill),
                           ),
                           child: Text(items[i].badge!,
@@ -186,7 +186,7 @@ class _MenuCard extends StatelessWidget {
                         const SizedBox(width: 8),
                       ],
                       const Icon(Icons.chevron_right_rounded,
-                          size: 20, color: AppColors.faint),
+                          size: 20, color: AppColors.inkFaint),
                     ],
                   ),
                 ),

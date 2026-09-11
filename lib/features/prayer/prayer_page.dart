@@ -77,9 +77,9 @@ class _WeekPicker extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(week.label,
-                style: AppText.label.copyWith(color: AppColors.deep)),
+                style: AppText.label.copyWith(color: AppColors.brand)),
             const Icon(Icons.expand_more_rounded,
-                size: 18, color: AppColors.deep),
+                size: 18, color: AppColors.brand),
           ],
         ),
       ),
@@ -212,7 +212,7 @@ class _SubmitBar extends ConsumerWidget {
               onPressed: () => _preview(context),
               icon: const Icon(Icons.visibility_outlined, size: 15),
               label: const Text('복사될 내용 미리보기'),
-              style: TextButton.styleFrom(foregroundColor: AppColors.muted),
+              style: TextButton.styleFrom(foregroundColor: AppColors.inkMuted),
             ),
           ),
         ],
@@ -434,7 +434,7 @@ class _TopicRow extends ConsumerWidget {
       child: Container(
         padding: const EdgeInsets.fromLTRB(13, 11, 9, 11),
         decoration: BoxDecoration(
-          color: AppColors.mintSoft,
+          color: AppColors.fill,
           borderRadius: BorderRadius.circular(AppRadius.md),
         ),
         child: Row(
@@ -444,7 +444,7 @@ class _TopicRow extends ConsumerWidget {
               const Padding(
                 padding: EdgeInsets.only(top: 2),
                 child:
-                    Icon(Icons.lock_rounded, size: 12, color: AppColors.muted),
+                    Icon(Icons.lock_rounded, size: 12, color: AppColors.inkMuted),
               ),
               const SizedBox(width: 5),
             ],
@@ -462,10 +462,10 @@ class _TopicRow extends ConsumerWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
                   decoration: BoxDecoration(
-                    color: iPrayed ? AppColors.deep : Colors.white,
+                    color: iPrayed ? AppColors.brand : Colors.white,
                     borderRadius: BorderRadius.circular(AppRadius.pill),
                     border: Border.all(
-                        color: iPrayed ? AppColors.deep : AppColors.line),
+                        color: iPrayed ? AppColors.brand : AppColors.line),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -479,7 +479,7 @@ class _TopicRow extends ConsumerWidget {
                                 fontSize: 11.5,
                                 fontWeight: FontWeight.w700,
                                 color:
-                                    iPrayed ? Colors.white : AppColors.muted)),
+                                    iPrayed ? Colors.white : AppColors.inkMuted)),
                       ],
                     ],
                   ),

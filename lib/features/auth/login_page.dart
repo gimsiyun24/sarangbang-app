@@ -109,14 +109,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFFF3FAF6), Color(0xFFE7F3EC), Color(0xFFF6FAF7)],
-            stops: [0, 0.55, 1],
-          ),
-        ),
+        color: AppColors.canvas,
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -132,7 +125,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(26),
-                        boxShadow: AppShadow.raised,
+                        boxShadow: AppShadow.float,
                       ),
                       alignment: Alignment.center,
                       child: const Text('🍀', style: TextStyle(fontSize: 40)),
@@ -142,7 +135,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         textAlign: TextAlign.center, style: AppText.display),
                     const SizedBox(height: 10),
                     Text('우리 사랑방의 1년이 남는 곳',
-                        style: AppText.body.copyWith(color: AppColors.muted)),
+                        style: AppText.body.copyWith(color: AppColors.inkMuted)),
                     const SizedBox(height: 40),
 
                     // 앱이 뭘 담는지 한눈에
@@ -169,19 +162,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
-                          color: AppColors.warnBg,
+                          color: AppColors.dangerBg,
                           borderRadius: BorderRadius.circular(AppRadius.md),
                         ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Icon(Icons.error_outline_rounded,
-                                size: 16, color: AppColors.warn),
+                                size: 16, color: AppColors.danger),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(_error!,
                                   style: AppText.caption
-                                      .copyWith(color: AppColors.warn)),
+                                      .copyWith(color: AppColors.danger)),
                             ),
                           ],
                         ),
@@ -192,7 +185,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Icon(Icons.lock_outline_rounded,
-                            size: 12, color: AppColors.faint),
+                            size: 12, color: AppColors.inkFaint),
                         const SizedBox(width: 5),
                         Flexible(
                           child: Text(

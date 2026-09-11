@@ -147,7 +147,7 @@ class _PrayerEditorState extends ConsumerState<_PrayerEditor> {
       children: [
         SheetHandle('${widget.week.mmdd} 내 기도제목',
             trailing: Text(widget.week.range,
-                style: const TextStyle(fontSize: 11.5, color: AppColors.muted))),
+                style: const TextStyle(fontSize: 11.5, color: AppColors.inkMuted))),
 
         const _Head('기도제목'),
         for (var i = 0; i < _topics.length; i++) _topicRow(i),
@@ -173,7 +173,7 @@ class _PrayerEditorState extends ConsumerState<_PrayerEditor> {
         const Text(
           '🔒 나만 보기로 둔 항목은 카톡 복사에도 들어가지 않고,\n보안 규칙에서 본인 외 아무도 읽을 수 없습니다.',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 11.5, color: AppColors.muted, height: 1.6),
+          style: TextStyle(fontSize: 11.5, color: AppColors.inkMuted, height: 1.6),
         ),
       ],
     );
@@ -228,7 +228,7 @@ class _PrayerEditorState extends ConsumerState<_PrayerEditor> {
               if (r.prayedBy.isNotEmpty)
                 Text('🙏 ${r.prayedBy.length}',
                     style: const TextStyle(
-                        fontSize: 12, color: AppColors.muted)),
+                        fontSize: 12, color: AppColors.inkMuted)),
             ],
           ),
         ],
@@ -262,7 +262,7 @@ class _Head extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 10, left: 2),
         child: Text(text,
             style: const TextStyle(
-                fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.deep)),
+                fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.brand)),
       );
 }
 
@@ -300,7 +300,7 @@ class _VisChip extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
-            color: selected ? AppColors.deep : const Color(0xFFF1F5F3),
+            color: selected ? AppColors.brand : AppColors.fill,
             borderRadius: BorderRadius.circular(999),
           ),
           child: Row(
@@ -308,13 +308,13 @@ class _VisChip extends StatelessWidget {
             children: [
               Icon(icon,
                   size: 13,
-                  color: selected ? Colors.white : AppColors.muted),
+                  color: selected ? Colors.white : AppColors.inkMuted),
               const SizedBox(width: 5),
               Text(label,
                   style: TextStyle(
                       fontSize: 11.5,
                       fontWeight: FontWeight.w700,
-                      color: selected ? Colors.white : AppColors.muted)),
+                      color: selected ? Colors.white : AppColors.inkMuted)),
             ],
           ),
         ),

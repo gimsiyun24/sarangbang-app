@@ -4,11 +4,11 @@ import 'package:flutter/services.dart';
 import '../models/models.dart';
 import '../theme.dart';
 
-/// 화면 최대폭 — 웹에서 너무 넓어지지 않게
+/// 화면 최대폭 — 웹에서 너무 넓어지지 않게 (애기애타 본문 폭과 같음)
 class Bounded extends StatelessWidget {
   final Widget child;
   final double max;
-  const Bounded({super.key, required this.child, this.max = 620});
+  const Bounded({super.key, required this.child, this.max = 560});
 
   @override
   Widget build(BuildContext context) => Align(
@@ -27,7 +27,7 @@ class SectionTitle extends StatelessWidget {
   const SectionTitle(this.text,
       {super.key,
       this.trailing,
-      this.padding = const EdgeInsets.fromLTRB(4, 24, 4, 11)});
+      this.padding = const EdgeInsets.fromLTRB(0, 24, 0, 12)});
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -42,7 +42,7 @@ class SectionTitle extends StatelessWidget {
       );
 }
 
-/// 앱 전체의 기본 카드. 테두리 대신 아주 옅은 이중 그림자로 깊이를 줍니다.
+/// 앱 전체의 기본 카드. 테두리 대신 옅은 이중 그림자로 회색 바탕에서 띄웁니다.
 class SoftCard extends StatelessWidget {
   final Widget child;
   final EdgeInsets padding;
@@ -68,7 +68,7 @@ class SoftCard extends StatelessWidget {
     final br = BorderRadius.circular(radius);
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: gradient == null ? (color ?? AppColors.card) : null,
+        color: gradient == null ? (color ?? AppColors.surface) : null,
         gradient: gradient,
         borderRadius: br,
         boxShadow: flat ? null : AppShadow.card,
@@ -104,7 +104,7 @@ class Avatar extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColors.mint,
+        color: AppColors.brand50,
         image: url.isNotEmpty
             ? DecorationImage(image: NetworkImage(url), fit: BoxFit.cover)
             : null,
@@ -118,8 +118,8 @@ class Avatar extends StatelessWidget {
                 fontFamily: kFontFamily,
                 fontFamilyFallback: kFontFallback,
                 fontSize: size * 0.4,
-                fontWeight: FontWeight.w800,
-                color: AppColors.deep,
+                fontWeight: FontWeight.w700,
+                color: AppColors.brand,
                 letterSpacing: -0.5,
               ),
             ),
@@ -129,7 +129,7 @@ class Avatar extends StatelessWidget {
       padding: const EdgeInsets.all(2.5),
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.white,
+        color: AppColors.surface,
         boxShadow: AppShadow.card,
       ),
       child: inner,
@@ -137,6 +137,7 @@ class Avatar extends StatelessWidget {
   }
 }
 
+/// 목록이 비었을 때 보여주는 안내. 애기애타처럼 동그라미 바탕 없이 가운데에 둡니다.
 class EmptyState extends StatelessWidget {
   final String emoji, title;
   final String? subtitle;
@@ -152,28 +153,22 @@ class EmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 44),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 56),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                width: 72,
-                height: 72,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.mintSoft,
-                ),
-                alignment: Alignment.center,
-                child: Text(emoji, style: const TextStyle(fontSize: 30)),
-              ),
-              const SizedBox(height: 16),
-              Text(title, textAlign: TextAlign.center, style: AppText.bodyStrong),
+              Text(emoji, style: const TextStyle(fontSize: 34)),
+              const SizedBox(height: 12),
+              Text(title,
+                  textAlign: TextAlign.center,
+                  style: AppText.bodyStrong.copyWith(color: AppColors.inkSoft)),
               if (subtitle != null) ...[
-                const SizedBox(height: 7),
+                const SizedBox(height: 6),
                 Text(subtitle!,
-                    textAlign: TextAlign.center, style: AppText.caption),
+                    textAlign: TextAlign.center,
+                    style: AppText.caption.copyWith(color: AppColors.inkFaint)),
               ],
-              if (action != null) ...[const SizedBox(height: 20), action!],
+              if (action != null) ...[const SizedBox(height: 16), action!],
             ],
           ),
         ),
@@ -213,7 +208,7 @@ class _SkeletonState extends State<Skeleton>
           width: widget.width,
           decoration: BoxDecoration(
             color: Color.lerp(
-                const Color(0xFFEDF3F0), const Color(0xFFE1EBE6), _c.value),
+                AppColors.skeletonBase, AppColors.skeletonShine, _c.value),
             borderRadius: BorderRadius.circular(widget.radius),
           ),
         ),
@@ -299,6 +294,7 @@ class KV extends StatelessWidget {
       );
 }
 
+/// 짧은 상태 표시. 기본은 옅은 파랑 바탕 + 파랑 글씨 (애기애타 Badge 와 같은 모양)
 class Pill extends StatelessWidget {
   final String text;
   final Color? bg, fg;
@@ -307,16 +303,16 @@ class Pill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: EdgeInsets.fromLTRB(icon == null ? 10 : 8, 4.5, 10, 4.5),
+        padding: EdgeInsets.fromLTRB(icon == null ? 10 : 8, 4, 10, 4),
         decoration: BoxDecoration(
-          color: bg ?? AppColors.mint,
+          color: bg ?? AppColors.brand50,
           borderRadius: BorderRadius.circular(AppRadius.pill),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 12, color: fg ?? AppColors.deep),
+              Icon(icon, size: 12, color: fg ?? AppColors.brand),
               const SizedBox(width: 4),
             ],
             Text(
@@ -324,9 +320,9 @@ class Pill extends StatelessWidget {
               style: TextStyle(
                 fontFamily: kFontFamily,
                 fontFamilyFallback: kFontFallback,
-                fontSize: 11.5,
+                fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: fg ?? AppColors.deep,
+                color: fg ?? AppColors.brand,
                 letterSpacing: -0.2,
               ),
             ),
@@ -352,8 +348,8 @@ class Meter extends StatelessWidget {
           builder: (c, v, _) => LinearProgressIndicator(
             value: v,
             minHeight: height,
-            color: color ?? AppColors.seed,
-            backgroundColor: AppColors.lineSoft,
+            color: color ?? AppColors.brand,
+            backgroundColor: AppColors.line,
           ),
         ),
       );
@@ -390,15 +386,16 @@ Future<bool> confirm(
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(c, false),
-          style: TextButton.styleFrom(foregroundColor: AppColors.muted),
+          style: TextButton.styleFrom(foregroundColor: AppColors.inkMuted),
           child: const Text('취소'),
         ),
         const SizedBox(width: 4),
         FilledButton(
           style: danger
               ? FilledButton.styleFrom(
-                  backgroundColor: AppColors.warn, minimumSize: const Size(0, 42))
-              : FilledButton.styleFrom(minimumSize: const Size(0, 42)),
+                  backgroundColor: AppColors.danger,
+                  minimumSize: const Size(0, 44))
+              : FilledButton.styleFrom(minimumSize: const Size(0, 44)),
           onPressed: () => Navigator.pop(c, true),
           child: Text(ok),
         ),
@@ -414,14 +411,15 @@ Future<T?> openSheet<T>(BuildContext context, Widget child) =>
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
-      barrierColor: const Color(0x66101A15),
+      barrierColor: AppColors.ink.withValues(alpha: 0.4),
       builder: (c) => Padding(
         padding: EdgeInsets.only(bottom: MediaQuery.of(c).viewInsets.bottom),
         child: SafeArea(
           top: false,
           child: Bounded(
+            max: 480,
             child: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(20, 12, 20, 26),
+              padding: const EdgeInsets.fromLTRB(24, 12, 24, 28),
               child: child,
             ),
           ),
@@ -442,14 +440,16 @@ class SheetHandle extends StatelessWidget {
             height: 4,
             margin: const EdgeInsets.only(bottom: 18),
             decoration: BoxDecoration(
-              color: const Color(0xFFDDE7E2),
+              color: AppColors.lineStrong,
               borderRadius: BorderRadius.circular(AppRadius.pill),
             ),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Expanded(child: Text(title, style: AppText.cardTitle)),
+              Expanded(
+                  child: Text(title,
+                      style: AppText.cardTitle.copyWith(fontSize: 18))),
               ?trailing,
             ],
           ),

@@ -100,7 +100,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
                   icon: const Icon(Icons.more_horiz_rounded,
-                      size: 18, color: AppColors.muted),
+                      size: 18, color: AppColors.inkMuted),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                   onSelected: (v) async {
@@ -125,7 +125,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
               if (s.supportAmount > 0)
                 Expanded(
                   child: _Stat('교회지원', '-${won(s.supportAmount)}',
-                      color: AppColors.deep),
+                      color: AppColors.brand),
                 ),
               Expanded(
                 child: _Stat('1인당', won(s.shareBase), strong: true),
@@ -138,7 +138,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
             child: LinearProgressIndicator(
               value: people.isEmpty ? 0 : s.paid.length / people.length,
               minHeight: 7,
-              backgroundColor: const Color(0xFFEDF3F0),
+              backgroundColor: AppColors.fill,
             ),
           ),
           const SizedBox(height: 8),
@@ -146,17 +146,17 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
             children: [
               Text('입금 ${s.paid.length}/${people.length}명',
                   style: const TextStyle(
-                      fontSize: 12, color: AppColors.muted)),
+                      fontSize: 12, color: AppColors.inkMuted)),
               const Spacer(),
               if (uid != null && people.contains(uid))
                 Pill(
                   s.paid.contains(uid) ? '내 입금 완료' : '내 몫 ${won(myAmount)}',
                   bg: s.paid.contains(uid)
-                      ? AppColors.mint
-                      : const Color(0xFFFDF0E8),
+                      ? AppColors.brand50
+                      : AppColors.goldBg,
                   fg: s.paid.contains(uid)
-                      ? AppColors.deep
-                      : const Color(0xFFC0733F),
+                      ? AppColors.brand
+                      : AppColors.gold,
                 ),
             ],
           ),
@@ -173,22 +173,22 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
                   width: double.infinity,
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: AppColors.mint,
+                    color: AppColors.brand50,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(children: [
                     const Icon(Icons.account_balance_outlined,
-                        size: 16, color: AppColors.deep),
+                        size: 16, color: AppColors.brand),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(s.account,
                           style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
-                              color: AppColors.deep)),
+                              color: AppColors.brand)),
                     ),
                     const Icon(Icons.copy_rounded,
-                        size: 15, color: AppColors.deep),
+                        size: 15, color: AppColors.brand),
                   ]),
                 ),
               ),
@@ -197,13 +197,13 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
               Text(
                   '입금 기한 ${DateFormat('M월 d일 (E)', 'ko_KR').format(s.deadline!)}',
                   style: const TextStyle(
-                      fontSize: 12, color: AppColors.muted)),
+                      fontSize: 12, color: AppColors.inkMuted)),
             ],
             if (s.memo.isNotEmpty) ...[
               const SizedBox(height: 8),
               Text(s.memo,
                   style: const TextStyle(
-                      fontSize: 12.5, color: AppColors.muted, height: 1.6)),
+                      fontSize: 12.5, color: AppColors.inkMuted, height: 1.6)),
             ],
             const SizedBox(height: 14),
             for (final u in people)
@@ -227,7 +227,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
                                     .map((e) => '${e.label} ${won(e.amount)}')
                                     .join(', '),
                                 style: const TextStyle(
-                                    fontSize: 11, color: AppColors.muted)),
+                                    fontSize: 11, color: AppColors.inkMuted)),
                         ],
                       ),
                     ),
@@ -243,8 +243,8 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
                             horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
                           color: s.paid.contains(u)
-                              ? AppColors.seed
-                              : const Color(0xFFF1F5F3),
+                              ? AppColors.brand
+                              : AppColors.fill,
                           borderRadius: BorderRadius.circular(999),
                         ),
                         child: Text(s.paid.contains(u) ? '입금완료' : '미입금',
@@ -253,7 +253,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
                                 fontWeight: FontWeight.w700,
                                 color: s.paid.contains(u)
                                     ? Colors.white
-                                    : AppColors.muted)),
+                                    : AppColors.inkMuted)),
                       ),
                     ),
                   ],
@@ -294,7 +294,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
             const SizedBox(height: 8),
             const Text('⚠️ 앱이 돈을 옮기지 않습니다. 계좌 안내와 체크만 합니다.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 11, color: AppColors.muted)),
+                style: TextStyle(fontSize: 11, color: AppColors.inkMuted)),
           ],
         ],
       ),
@@ -335,13 +335,13 @@ class _Stat extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label,
-              style: const TextStyle(fontSize: 11, color: AppColors.muted)),
+              style: const TextStyle(fontSize: 11, color: AppColors.inkMuted)),
           const SizedBox(height: 2),
           Text(value,
               style: TextStyle(
                   fontSize: strong ? 15 : 13.5,
                   fontWeight: strong ? FontWeight.w800 : FontWeight.w600,
-                  color: color ?? (strong ? AppColors.deep : null))),
+                  color: color ?? (strong ? AppColors.brand : null))),
         ],
       );
 }
@@ -496,13 +496,13 @@ class _SettlementEditorState extends ConsumerState<_SettlementEditor> {
                 selected: _selected.contains(m.uid),
                 label: Text(m.display),
                 showCheckmark: false,
-                selectedColor: AppColors.deep,
+                selectedColor: AppColors.brand,
                 labelStyle: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: _selected.contains(m.uid)
                       ? Colors.white
-                      : AppColors.deep,
+                      : AppColors.brand,
                 ),
                 onSelected: (v) => setState(() =>
                     v ? _selected.add(m.uid) : _selected.remove(m.uid)),
@@ -514,7 +514,7 @@ class _SettlementEditorState extends ConsumerState<_SettlementEditor> {
           Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: AppColors.mint,
+              color: AppColors.brand50,
               borderRadius: BorderRadius.circular(14),
             ),
             child: Row(
@@ -523,13 +523,13 @@ class _SettlementEditorState extends ConsumerState<_SettlementEditor> {
                     style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w700,
-                        color: AppColors.deep)),
+                        color: AppColors.brand)),
                 const Spacer(),
                 Text('${won(_share)}  (${_selected.length}명)',
                     style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w800,
-                        color: AppColors.deep)),
+                        color: AppColors.brand)),
               ],
             ),
           ),
@@ -637,7 +637,7 @@ class _SettlementEditorState extends ConsumerState<_SettlementEditor> {
                   : DateFormat('yyyy년 M월 d일 (E)', 'ko_KR').format(_deadline!),
               style: TextStyle(
                   fontSize: 14,
-                  color: _deadline == null ? AppColors.muted : null),
+                  color: _deadline == null ? AppColors.inkMuted : null),
             ),
           ),
         ),

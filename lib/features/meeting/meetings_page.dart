@@ -106,10 +106,10 @@ class _MeetingTile extends ConsumerWidget {
     final mine = attendFrom(att[uid]?['status'] as String?);
 
     final (bg, fg) = switch (mine) {
-      AttendStatus.present => (AppColors.mint, AppColors.deep),
-      AttendStatus.online => (AppColors.blueBg, AppColors.blue),
-      AttendStatus.absent => (const Color(0xFFF3F1EE), AppColors.muted),
-      AttendStatus.none => (AppColors.lineSoft, AppColors.muted),
+      AttendStatus.present => (AppColors.brand50, AppColors.brand),
+      AttendStatus.online => (AppColors.violetBg, AppColors.violet),
+      AttendStatus.absent => (AppColors.fill, AppColors.inkMuted),
+      AttendStatus.none => (AppColors.fill, AppColors.inkMuted),
     };
 
     return SoftCard(
@@ -119,25 +119,31 @@ class _MeetingTile extends ConsumerWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 날짜 블록
+            // 날짜 블록 — 애기애타 일정 목록처럼 브랜드색으로 채움 (지난 일정은 회색)
             Container(
               width: 52,
               padding: const EdgeInsets.symmetric(vertical: 9),
               decoration: BoxDecoration(
-                color: dim ? AppColors.lineSoft : AppColors.mintSoft,
+                color: dim ? AppColors.fill : AppColors.brand,
                 borderRadius: BorderRadius.circular(AppRadius.sm),
               ),
               child: Column(
                 children: [
                   Text(DateFormat('E', 'ko_KR').format(meeting.startAt),
                       style: AppText.micro.copyWith(
-                          color: dim ? AppColors.faint : AppColors.deep)),
+                          color: dim
+                              ? AppColors.inkFaint
+                              : Colors.white.withValues(alpha: 0.9))),
                   const SizedBox(height: 1),
                   Text('${meeting.startAt.day}',
                       style: AppText.num.copyWith(
                           fontSize: 20,
-                          color: dim ? AppColors.muted : AppColors.deep)),
-                  Text('${meeting.startAt.month}월', style: AppText.micro),
+                          color: dim ? AppColors.inkMuted : Colors.white)),
+                  Text('${meeting.startAt.month}월',
+                      style: AppText.micro.copyWith(
+                          color: dim
+                              ? AppColors.inkFaint
+                              : Colors.white.withValues(alpha: 0.9))),
                 ],
               ),
             ),
@@ -162,14 +168,14 @@ class _MeetingTile extends ConsumerWidget {
                   Row(
                     children: [
                       const Icon(Icons.schedule_rounded,
-                          size: 12.5, color: AppColors.faint),
+                          size: 12.5, color: AppColors.inkFaint),
                       const SizedBox(width: 4),
                       Text(DateFormat('a h:mm', 'ko_KR').format(meeting.startAt),
                           style: AppText.caption),
                       if (meeting.place.isNotEmpty) ...[
                         const SizedBox(width: 10),
                         const Icon(Icons.place_outlined,
-                            size: 12.5, color: AppColors.faint),
+                            size: 12.5, color: AppColors.inkFaint),
                         const SizedBox(width: 3),
                         Flexible(
                           child: Text(meeting.place,
@@ -183,7 +189,7 @@ class _MeetingTile extends ConsumerWidget {
                   Row(
                     children: [
                       const Icon(Icons.groups_rounded,
-                          size: 13, color: AppColors.faint),
+                          size: 13, color: AppColors.inkFaint),
                       const SizedBox(width: 4),
                       Text(
                           present + online == 0
@@ -192,7 +198,7 @@ class _MeetingTile extends ConsumerWidget {
                           style: AppText.micro),
                       const Spacer(),
                       const Icon(Icons.chevron_right_rounded,
-                          size: 18, color: AppColors.faint),
+                          size: 18, color: AppColors.inkFaint),
                     ],
                   ),
                 ],
@@ -337,12 +343,12 @@ class _MeetingEditorState extends ConsumerState<_MeetingEditor> {
                     padding: const EdgeInsets.symmetric(vertical: 13),
                     decoration: BoxDecoration(
                       color: _roomId == r.id
-                          ? AppColors.mint
-                          : AppColors.mintSoft,
+                          ? AppColors.brand50
+                          : AppColors.fill,
                       borderRadius: BorderRadius.circular(AppRadius.md),
                       border: Border.all(
                         color: _roomId == r.id
-                            ? AppColors.seed
+                            ? AppColors.brand
                             : Colors.transparent,
                         width: 1.6,
                       ),
@@ -355,8 +361,8 @@ class _MeetingEditorState extends ConsumerState<_MeetingEditor> {
                             style: AppText.label.copyWith(
                               fontSize: 12.5,
                               color: _roomId == r.id
-                                  ? AppColors.deep
-                                  : AppColors.muted,
+                                  ? AppColors.brand
+                                  : AppColors.inkMuted,
                             )),
                       ],
                     ),
@@ -458,7 +464,7 @@ class _AttendanceStatsState extends ConsumerState<_AttendanceStats> {
         SheetHandle('${AppConfig.roomOf(widget.roomId).name} 출석 통계',
             trailing: const Pill('방장 전용', icon: Icons.lock_rounded)),
         if (_error != null)
-          Text(_error!, style: AppText.caption.copyWith(color: AppColors.warn))
+          Text(_error!, style: AppText.caption.copyWith(color: AppColors.danger))
         else if (_result == null)
           const Loading()
         else if (_result!.isEmpty)

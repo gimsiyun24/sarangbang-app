@@ -81,7 +81,7 @@ class _SetupNeededApp extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: AppColors.mint,
+                      color: AppColors.brand50,
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: const Text(
@@ -96,7 +96,7 @@ class _SetupNeededApp extends StatelessWidget {
                           fontFamily: 'monospace',
                           fontSize: 13,
                           height: 1.7,
-                          color: AppColors.deep),
+                          color: AppColors.brand),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -104,7 +104,7 @@ class _SetupNeededApp extends StatelessWidget {
                     '값 위치: Firebase 콘솔 → 프로젝트 설정(⚙️) → 내 앱 → firebaseConfig\n'
                     '자세한 건 02_Firebase설정가이드.md / 03_Cloudinary설정가이드.md 참고',
                     style: TextStyle(
-                        fontSize: 12.5, color: AppColors.muted, height: 1.6),
+                        fontSize: 12.5, color: AppColors.inkMuted, height: 1.6),
                   ),
                   if (error != null) ...[
                     const SizedBox(height: 20),
@@ -112,12 +112,12 @@ class _SetupNeededApp extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFDEEE9),
+                        color: AppColors.dangerBg,
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: Text('Firebase 초기화 오류\n$error',
                           style: const TextStyle(
-                              fontSize: 12, color: AppColors.warn, height: 1.5)),
+                              fontSize: 12, color: AppColors.danger, height: 1.5)),
                     ),
                   ],
                 ],
