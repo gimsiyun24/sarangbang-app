@@ -446,7 +446,7 @@ class _TopicRow extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (topic.isPrivate) ...[
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 2),
                 child:
                     AppIcon(AppIcons.lock, size: 12, color: AppColors.inkMuted),
@@ -467,7 +467,7 @@ class _TopicRow extends ConsumerWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
                   decoration: BoxDecoration(
-                    color: iPrayed ? AppColors.brand : Colors.white,
+                    color: iPrayed ? AppColors.brand : AppColors.surface,
                     borderRadius: BorderRadius.circular(AppRadius.pill),
                     border: Border.all(
                         color: iPrayed ? AppColors.brand : AppColors.line),

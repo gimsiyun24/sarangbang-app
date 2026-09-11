@@ -10,6 +10,7 @@ import 'features/auth/profile_setup_page.dart';
 import 'features/auth/room_select_page.dart';
 import 'theme.dart';
 import 'widgets/common.dart';
+import 'widgets/push_sync.dart';
 
 class AppShell extends ConsumerWidget {
   final StatefulNavigationShell shell;
@@ -36,7 +37,7 @@ class AppShell extends ConsumerWidget {
     }
 
     return Scaffold(
-      body: shell,
+      body: PushSync(child: shell),
       bottomNavigationBar: _FloatingTabBar(
         currentIndex: shell.currentIndex,
         onTap: (i) =>
@@ -336,7 +337,7 @@ class SubPage extends StatelessWidget {
           titleSpacing: 0,
           leadingWidth: 56,
           leading: IconButton(
-            icon: const AppIcon(AppIcons.chevronLeft,
+            icon: AppIcon(AppIcons.chevronLeft,
                 size: 30, color: AppColors.ink),
             onPressed: () => context.canPop()
                 ? context.pop()

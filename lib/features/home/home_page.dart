@@ -102,7 +102,7 @@ class _NextMeetingBanner extends ConsumerWidget {
                 child: Text('예정된 모임이 없어요. 일정을 등록해보세요.',
                     style: AppText.body.copyWith(fontSize: 13.5)),
               ),
-              const AppIcon(AppIcons.chevronRight,
+              AppIcon(AppIcons.chevronRight,
                   color: AppColors.inkFaint, size: 20),
             ],
           ),
@@ -220,7 +220,7 @@ class _BirthdayBanner extends ConsumerWidget {
         onTap: () => context.go('/more/members'),
         child: Row(
           children: [
-            const AppIcon(AppIcons.cake, size: 24, color: AppColors.rose),
+            AppIcon(AppIcons.cake, size: 24, color: AppColors.rose),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -238,7 +238,7 @@ class _BirthdayBanner extends ConsumerWidget {
                 ],
               ),
             ),
-            const AppIcon(AppIcons.chevronRight,
+            AppIcon(AppIcons.chevronRight,
                 color: AppColors.rose, size: 20),
           ],
         ),
@@ -369,7 +369,7 @@ class _RoutineRow extends StatelessWidget {
                 height: 23,
                 margin: const EdgeInsets.only(top: 1),
                 decoration: BoxDecoration(
-                  color: checked ? AppColors.brand : Colors.white,
+                  color: checked ? AppColors.brand : AppColors.surface,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
                       color: checked ? AppColors.brand : AppColors.lineStrong,
@@ -420,7 +420,7 @@ class _PrayerNudge extends ConsumerWidget {
         onTap: () => openPrayerEditor(context, ref, week: week),
         child: Row(
           children: [
-            const AppIcon(AppIcons.pencil, size: 22, color: AppColors.gold),
+            AppIcon(AppIcons.pencil, size: 22, color: AppColors.gold),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -434,7 +434,7 @@ class _PrayerNudge extends ConsumerWidget {
                 ],
               ),
             ),
-            const AppIcon(AppIcons.chevronRight,
+            AppIcon(AppIcons.chevronRight,
                 color: AppColors.gold, size: 20),
           ],
         ),

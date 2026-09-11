@@ -125,7 +125,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       width: 84,
                       height: 84,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.surface,
                         borderRadius: BorderRadius.circular(26),
                         boxShadow: AppShadow.float,
                       ),
@@ -170,7 +170,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const AppIcon(AppIcons.alertCircle,
+                            AppIcon(AppIcons.alertCircle,
                                 size: 16, color: AppColors.danger),
                             const SizedBox(width: 8),
                             Expanded(
@@ -186,7 +186,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const AppIcon(AppIcons.lock,
+                        AppIcon(AppIcons.lock,
                             size: 12, color: AppColors.inkFaint),
                         const SizedBox(width: 5),
                         Flexible(
@@ -229,7 +229,7 @@ class _Features extends StatelessWidget {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.75),
+                      color: AppColors.surface.withValues(alpha: 0.75),
                       borderRadius: BorderRadius.circular(13),
                     ),
                     alignment: Alignment.center,

@@ -28,6 +28,10 @@ class Refs {
           String uid, String year) =>
       member(uid).collection('birthdayCards').doc(year).collection('messages');
 
+  /// 푸시 알림을 받을 기기 — 문서 id 가 FCM 토큰 (core/push.dart)
+  static DocumentReference<Map<String, dynamic>> pushToken(String token) =>
+      group.collection('pushTokens').doc(token);
+
   // ── 사랑방 ────────────────────────────────────────────────
   static CollectionReference<Map<String, dynamic>> get rooms =>
       group.collection('rooms');

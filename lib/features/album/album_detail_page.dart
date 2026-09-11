@@ -155,7 +155,7 @@ class _AlbumDetailPageState extends ConsumerState<AlbumDetailPage> {
                 onChanged: (v) => setState(() => _keepOriginal = v),
                 title: const Text('원본 그대로 올리기',
                     style: TextStyle(fontSize: 13)),
-                subtitle: const Text('끄면 긴 변 2560px으로 줄여서 올립니다',
+                subtitle: Text('끄면 긴 변 2560px으로 줄여서 올립니다',
                     style: TextStyle(fontSize: 11.5, color: AppColors.inkMuted)),
               ),
             ),
@@ -174,7 +174,7 @@ class _AlbumDetailPageState extends ConsumerState<AlbumDetailPage> {
                   ),
                   const SizedBox(height: 6),
                   Text('$_done / $_total 장 올리는 중...',
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 12, color: AppColors.inkMuted)),
                 ],
               ),

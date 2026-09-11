@@ -112,7 +112,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                       decoration: BoxDecoration(
                         color: AppColors.brand,
                         shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 2),
+                        border: Border.all(color: AppColors.canvas, width: 2),
                       ),
                       child: _uploading
                           ? const SizedBox(
@@ -247,7 +247,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
           Text(
             '표시 이름 기준: ${AppConfig.preferNickname ? '별칭 우선' : '실명 우선'}\n'
             '(lib/app_config.dart 의 preferNickname 으로 바꿀 수 있어요)',
-            style: const TextStyle(
+            style: TextStyle(
                 fontSize: 11.5, color: AppColors.inkMuted, height: 1.6),
           ),
           const SizedBox(height: 20),
@@ -283,7 +283,7 @@ class _L extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(bottom: 8, left: 2),
         child: Text(text,
-            style: const TextStyle(
+            style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
                 color: AppColors.inkSoft)),

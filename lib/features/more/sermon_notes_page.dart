@@ -124,11 +124,11 @@ class _NoteCard extends ConsumerWidget {
               const SizedBox(width: 6),
               Text(author?.display ?? '',
                   style:
-                      const TextStyle(fontSize: 11.5, color: AppColors.inkMuted)),
+                      TextStyle(fontSize: 11.5, color: AppColors.inkMuted)),
               if (note.authorUid == uid)
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
-                  icon: const AppIcon(AppIcons.moreHoriz,
+                  icon: AppIcon(AppIcons.moreHoriz,
                       size: 18, color: AppColors.inkMuted),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
@@ -201,7 +201,7 @@ class _NoteDetail extends StatelessWidget {
             Avatar(member: author, size: 22),
             const SizedBox(width: 6),
             Text(author?.display ?? '',
-                style: const TextStyle(fontSize: 12, color: AppColors.inkMuted)),
+                style: TextStyle(fontSize: 12, color: AppColors.inkMuted)),
           ]),
           if (note.scripture.isNotEmpty) ...[
             const SizedBox(height: 16),
@@ -252,7 +252,7 @@ class _NoteHead extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: Text(text,
-            style: const TextStyle(
+            style: TextStyle(
                 fontSize: 12.5,
                 fontWeight: FontWeight.w800,
                 color: AppColors.inkMuted)),

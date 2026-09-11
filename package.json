@@ -1,0 +1,9 @@
+{
+  "name": "sarangbang-app-functions",
+  "private": true,
+  "description": "Netlify 함수(netlify/functions/push.mts — 푸시 알림 발송)가 쓰는 패키지만 적습니다. Flutter 앱 빌드와는 상관없습니다.",
+  "type": "module",
+  "dependencies": {
+    "firebase-admin": "^13.0.0"
+  }
+}

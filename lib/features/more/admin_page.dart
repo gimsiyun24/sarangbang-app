@@ -100,7 +100,7 @@ class AdminPage extends ConsumerWidget {
                 ),
                 KV('멤버 수', '우리 분반 ${members.length}명 · 청년부 전체 ${(ref.watch(membersProvider).value ?? const []).length}명'),
                 const SizedBox(height: 12),
-                const Text(
+                Text(
                   '초대코드는 Firebase 콘솔 → groups/nw2026 문서의 joinCode 필드를\n'
                   '채우면 켜지고, 비우면 꺼집니다. (앱 재배포 불필요)',
                   style: TextStyle(
@@ -130,7 +130,7 @@ class AdminPage extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 20),
-          const Text(
+          Text(
             '승인 절차가 없으므로 보안 규칙이 보장하는 범위는\n'
             '"Google 로그인을 한 사람만 볼 수 있다" 까지입니다.\n'
             '외부 유입이 신경 쓰이면 초대코드를 켜주세요.',
@@ -162,7 +162,7 @@ class _Check extends StatelessWidget {
           Flexible(
             child: Text(value.isEmpty ? '미설정' : value,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 12, color: AppColors.inkMuted)),
+                style: TextStyle(fontSize: 12, color: AppColors.inkMuted)),
           ),
         ],
       );

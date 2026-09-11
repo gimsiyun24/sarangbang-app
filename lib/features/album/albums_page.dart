@@ -26,7 +26,7 @@ class AlbumsPage extends ConsumerWidget {
       title: '앨범',
       actions: [
         if (!AppConfig.isCloudinaryConfigured)
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(right: 4),
             child: Center(
                 child: Pill('Cloudinary 미설정',

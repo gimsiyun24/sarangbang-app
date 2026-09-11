@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../app_config.dart';
 import '../../core/providers.dart';
+import '../../core/push.dart';
 import '../../core/refs.dart';
 import '../../models/models.dart';
 import '../../theme.dart';
@@ -168,14 +169,14 @@ class _MeetingTile extends ConsumerWidget {
                   const SizedBox(height: 6),
                   Row(
                     children: [
-                      const AppIcon(AppIcons.clock,
+                      AppIcon(AppIcons.clock,
                           size: 12.5, color: AppColors.inkFaint),
                       const SizedBox(width: 4),
                       Text(DateFormat('a h:mm', 'ko_KR').format(meeting.startAt),
                           style: AppText.caption),
                       if (meeting.place.isNotEmpty) ...[
                         const SizedBox(width: 10),
-                        const AppIcon(AppIcons.pin,
+                        AppIcon(AppIcons.pin,
                             size: 12.5, color: AppColors.inkFaint),
                         const SizedBox(width: 3),
                         Flexible(
@@ -189,7 +190,7 @@ class _MeetingTile extends ConsumerWidget {
                   const SizedBox(height: 9),
                   Row(
                     children: [
-                      const AppIcon(AppIcons.users,
+                      AppIcon(AppIcons.users,
                           size: 13, color: AppColors.inkFaint),
                       const SizedBox(width: 4),
                       Text(
@@ -198,7 +199,7 @@ class _MeetingTile extends ConsumerWidget {
                               : '참석 $present명${online > 0 ? ' · 온라인 $online명' : ''}',
                           style: AppText.micro),
                       const Spacer(),
-                      const AppIcon(AppIcons.chevronRight,
+                      AppIcon(AppIcons.chevronRight,
                           size: 18, color: AppColors.inkFaint),
                     ],
                   ),
@@ -296,8 +297,10 @@ class _MeetingEditorState extends ConsumerState<_MeetingEditor> {
         'authorUid': widget.meeting?.authorUid ?? uid,
       };
       if (widget.meeting == null) {
-        await Refs.meetings(_roomId)
+        final doc = await Refs.meetings(_roomId)
             .add({...data, 'createdAt': FieldValue.serverTimestamp()});
+        // 새로 올린 그 한 번만 그 사랑방 사람들에게 푸시 알림 (수정할 때는 보내지 않음)
+        requestPush(PushKind.meeting, roomId: _roomId, id: doc.id);
       } else {
         // 사랑방을 옮긴 경우: 새 방에 만들고 원래 방에서 지웁니다
         if (_roomId != widget.initialRoomId) {

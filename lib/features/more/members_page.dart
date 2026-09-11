@@ -120,12 +120,12 @@ class _MemberTile extends ConsumerWidget {
                         member.name.isNotEmpty) ...[
                       const SizedBox(width: 6),
                       Text(member.name,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 12, color: AppColors.inkMuted)),
                     ],
                     if (isToday) ...[
                       const SizedBox(width: 6),
-                      const AppIcon(AppIcons.cake, size: 18, color: AppColors.rose),
+                      AppIcon(AppIcons.cake, size: 18, color: AppColors.rose),
                     ],
                   ],
                 ),
@@ -134,7 +134,7 @@ class _MemberTile extends ConsumerWidget {
                   Text(member.bio,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 12.5, color: AppColors.inkMuted)),
                 ],
               ],
@@ -151,7 +151,7 @@ class _MemberTile extends ConsumerWidget {
                         color: AppColors.brand)),
                 if (days != null && days <= 30)
                   Text(isToday ? '오늘!' : 'D-$days',
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 11, color: AppColors.inkMuted)),
               ],
             ),
@@ -233,7 +233,7 @@ class _RollingPaperState extends ConsumerState<_RollingPaper> {
                       ? '오늘이 생일이에요! 🎂'
                       : (days == null ? '' : '생일까지 D-$days'),
                   style:
-                      const TextStyle(fontSize: 12.5, color: AppColors.inkMuted),
+                      TextStyle(fontSize: 12.5, color: AppColors.inkMuted),
                 ),
               ],
             ),
@@ -263,13 +263,13 @@ class _RollingPaperState extends ConsumerState<_RollingPaper> {
                 ),
                 child: Column(
                   children: [
-                    const AppIcon(AppIcons.gift, size: 34, color: AppColors.rose),
+                    AppIcon(AppIcons.gift, size: 34, color: AppColors.rose),
                     const SizedBox(height: 8),
                     Text('${docs.length}개의 축하가 모였어요',
                         style: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w700)),
                     const SizedBox(height: 4),
-                    const Text('생일 당일에 함께 공개됩니다',
+                    Text('생일 당일에 함께 공개됩니다',
                         style: TextStyle(
                             fontSize: 12, color: AppColors.inkMuted)),
                   ],
@@ -292,7 +292,7 @@ class _RollingPaperState extends ConsumerState<_RollingPaper> {
                       children: [
                         Text(
                             members[d.data()['authorUid']]?.display ?? '익명',
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.rose)),

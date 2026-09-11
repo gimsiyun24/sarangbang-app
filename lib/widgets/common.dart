@@ -132,7 +132,7 @@ class Avatar extends StatelessWidget {
     if (!ring) return inner;
     return Container(
       padding: const EdgeInsets.all(2.5),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: AppColors.surface,
         boxShadow: AppShadow.card,

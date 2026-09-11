@@ -22,6 +22,19 @@
   <meta name="theme-color" content="#ECEDEE">
   <link rel="manifest" href="manifest.json">
 
+  <!-- 어두운 화면: 앱이 뜨기 전에 로딩 화면·폰 상단 색부터 맞춥니다. 안 그러면 어두운 설정인데 첫 화면만 밝게 번쩍입니다.
+       열쇠와 판단은 lib/core/display_settings.dart 와 같습니다 (고른 값이 없으면 폰 설정). -->
+  <script>
+    try {
+      var chosen = localStorage.getItem('sarangbang:theme');
+      var dark = chosen ? chosen === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (dark) {
+        document.documentElement.classList.add('dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#121315');
+      }
+    } catch (e) {}
+  </script>
+
   <!-- Pretendard 는 pubspec 에 번들되어 있습니다 (assets/fonts).
        CDN @font-face 는 CanvasKit 렌더러가 부분적으로만 가져가서
        한글 일부가 □ 로 깨집니다. 그래서 여기서는 불러오지 않습니다. -->
@@ -48,6 +61,8 @@
     }
     @keyframes splash-in { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
     @media (prefers-reduced-motion: reduce) { #boot .logo { animation: none } }
+    /* 어두운 화면 — lib/theme.dart 의 어두운 canvas */
+    html.dark, html.dark body, html.dark #boot { background: #121315; }
   </style>
 </head>
 <body>

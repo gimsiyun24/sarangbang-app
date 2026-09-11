@@ -157,7 +157,7 @@ class _InboxRow extends ConsumerWidget {
               children: [
                 Text(_listTime(item.createdAt), style: AppText.micro),
                 const SizedBox(height: 4),
-                const AppIcon(AppIcons.chevronRight, size: 16, color: AppColors.inkFaint),
+                AppIcon(AppIcons.chevronRight, size: 16, color: AppColors.inkFaint),
               ],
             ),
           ],

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/providers.dart';
+import '../../core/push.dart';
 import '../../core/refs.dart';
 import '../../models/models.dart';
 import '../../shell.dart';
@@ -105,7 +106,7 @@ class _NoticeCardState extends ConsumerState<_NoticeCard> {
               if (n.authorUid == uid)
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
-                  icon: const AppIcon(AppIcons.moreHoriz,
+                  icon: AppIcon(AppIcons.moreHoriz,
                       size: 18, color: AppColors.inkMuted),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
@@ -139,13 +140,13 @@ class _NoticeCardState extends ConsumerState<_NoticeCard> {
           Row(
             children: [
               Text(map[n.authorUid]?.display ?? '',
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 11.5, color: AppColors.inkMuted)),
               if (n.createdAt != null) ...[
-                const Text(' · ',
+                Text(' · ',
                     style: TextStyle(fontSize: 11.5, color: AppColors.inkMuted)),
                 Text(DateFormat('M/d HH:mm').format(n.createdAt!),
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: 11.5, color: AppColors.inkMuted)),
               ],
               const Spacer(),
@@ -246,7 +247,7 @@ class _NoticeEditorState extends ConsumerState<_NoticeEditor> {
     try {
       final uid = ref.read(myUidProvider)!;
       if (widget.notice == null) {
-        await Refs.notices(widget.roomId).add({
+        final doc = await Refs.notices(widget.roomId).add({
           'title': _title.text.trim(),
           'body': _body.text.trim(),
           'authorUid': uid,
@@ -254,6 +255,8 @@ class _NoticeEditorState extends ConsumerState<_NoticeEditor> {
           'readBy': [uid],
           'createdAt': FieldValue.serverTimestamp(),
         });
+        // 새로 올린 그 한 번만 푸시 알림 (수정할 때는 보내지 않음)
+        requestPush(PushKind.notice, roomId: widget.roomId, id: doc.id);
       } else {
         await Refs.notices(widget.roomId).doc(widget.notice!.id).update({
           'title': _title.text.trim(),
@@ -298,7 +301,7 @@ class _NoticeEditorState extends ConsumerState<_NoticeEditor> {
             value: _pinned,
             onChanged: (v) => setState(() => _pinned = v),
             title: const Text('상단에 고정', style: TextStyle(fontSize: 13.5)),
-            subtitle: const Text('홈 화면에도 표시됩니다',
+            subtitle: Text('홈 화면에도 표시됩니다',
                 style: TextStyle(fontSize: 11.5, color: AppColors.inkMuted)),
           ),
           const SizedBox(height: 12),

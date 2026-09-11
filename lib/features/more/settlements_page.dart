@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/providers.dart';
+import '../../core/push.dart';
 import '../../core/refs.dart';
 import '../../models/models.dart';
 import '../../shell.dart';
@@ -99,7 +100,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
               if (s.authorUid == uid)
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
-                  icon: const AppIcon(AppIcons.moreHoriz,
+                  icon: AppIcon(AppIcons.moreHoriz,
                       size: 18, color: AppColors.inkMuted),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
@@ -145,7 +146,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
           Row(
             children: [
               Text('입금 ${s.paid.length}/${people.length}명',
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 12, color: AppColors.inkMuted)),
               const Spacer(),
               if (uid != null && people.contains(uid))
@@ -196,13 +197,13 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
               const SizedBox(height: 8),
               Text(
                   '입금 기한 ${DateFormat('M월 d일 (E)', 'ko_KR').format(s.deadline!)}',
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 12, color: AppColors.inkMuted)),
             ],
             if (s.memo.isNotEmpty) ...[
               const SizedBox(height: 8),
               Text(s.memo,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 12.5, color: AppColors.inkMuted, height: 1.6)),
             ],
             const SizedBox(height: 14),
@@ -226,7 +227,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
                                     .where((e) => e.uid == u)
                                     .map((e) => '${e.label} ${won(e.amount)}')
                                     .join(', '),
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontSize: 11, color: AppColors.inkMuted)),
                         ],
                       ),
@@ -292,7 +293,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
               ],
             ),
             const SizedBox(height: 8),
-            const Text('⚠️ 앱이 돈을 옮기지 않습니다. 계좌 안내와 체크만 합니다.',
+            Text('⚠️ 앱이 돈을 옮기지 않습니다. 계좌 안내와 체크만 합니다.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 11, color: AppColors.inkMuted)),
           ],
@@ -335,7 +336,7 @@ class _Stat extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label,
-              style: const TextStyle(fontSize: 11, color: AppColors.inkMuted)),
+              style: TextStyle(fontSize: 11, color: AppColors.inkMuted)),
           const SizedBox(height: 2),
           Text(value,
               style: TextStyle(
@@ -396,7 +397,7 @@ class _SettlementEditorState extends ConsumerState<_SettlementEditor> {
     setState(() => _busy = true);
     try {
       final uid = ref.read(myUidProvider)!;
-      await Refs.settlements(widget.roomId).add({
+      final doc = await Refs.settlements(widget.roomId).add({
         'title': _title.text.trim(),
         'totalAmount': _totalV,
         'supportAmount': _supportV,
@@ -420,6 +421,7 @@ class _SettlementEditorState extends ConsumerState<_SettlementEditor> {
         'createdBy': uid,
         'createdAt': FieldValue.serverTimestamp(),
       });
+      requestPush(PushKind.settlement, roomId: widget.roomId, id: doc.id);
       if (mounted) Navigator.pop(context);
     } catch (e) {
       if (mounted) toast(context, '저장 실패: $e');

@@ -27,26 +27,72 @@ Future<void> main() async {
   runApp(const ProviderScope(child: SarangbangApp()));
 }
 
-class SarangbangApp extends StatefulWidget {
+class SarangbangApp extends ConsumerStatefulWidget {
   const SarangbangApp({super.key});
   @override
-  State<SarangbangApp> createState() => _SarangbangAppState();
+  ConsumerState<SarangbangApp> createState() => _SarangbangAppState();
 }
 
-class _SarangbangAppState extends State<SarangbangApp> {
+class _SarangbangAppState extends ConsumerState<SarangbangApp>
+    with WidgetsBindingObserver {
   late final _router = buildRouter();
 
+  /// 지난번에 그린 밝기 — 바뀌었을 때만 앱 전체를 다시 그립니다.
+  Brightness? _painted;
+
   @override
-  Widget build(BuildContext context) => MaterialApp.router(
-        title: '사랑방 나눔',
-        // 웹에서는 이 색이 <meta name="theme-color"> 가 되어 폰 상단(상태바·주소창) 색을 정합니다.
-        // 안 주면 테마의 주 색(파랑)이 들어가므로 화면 바탕과 같은 회색으로 둡니다.
-        color: AppColors.canvas,
-        debugShowCheckedModeBanner: false,
-        theme: buildTheme(),
-        routerConfig: _router,
-        builder: (context, child) => _Zoom(child: child!),
-      );
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  /// 앱을 켜 둔 채로 폰의 다크 모드가 바뀌면 그때도 따라갑니다(설정에서 직접 고르지 않았을 때).
+  @override
+  void didChangePlatformBrightness() {
+    ref.read(platformBrightnessProvider.notifier).state =
+        WidgetsBinding.instance.platformDispatcher.platformBrightness;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final brightness = ref.watch(resolvedBrightnessProvider);
+    AppColors.use(brightness);
+    if (_painted != null && _painted != brightness) {
+      // 색 토큰은 부를 때마다 지금 벌을 읽지만, 이미 그려진 화면은 스스로 다시 그리지 않습니다.
+      // 밝기가 바뀐 이번 프레임 뒤에 앱 전체를 한 번 다시 그려, 모든 화면이 새 색을 읽게 합니다.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _rebuildAll(context);
+      });
+    }
+    _painted = brightness;
+
+    return MaterialApp.router(
+      title: '사랑방 나눔',
+      // 웹에서는 이 색이 <meta name="theme-color"> 가 되어 폰 상단(상태바·주소창) 색을 정합니다.
+      // 안 주면 테마의 주 색(파랑)이 들어가므로 화면 바탕과 같은 색으로 둡니다.
+      color: AppColors.canvas,
+      debugShowCheckedModeBanner: false,
+      theme: buildTheme(),
+      routerConfig: _router,
+      builder: (context, child) => _Zoom(child: child!),
+    );
+  }
+}
+
+/// 이 위젯 아래의 모든 화면을 다시 그리게 표시합니다.
+void _rebuildAll(BuildContext context) {
+  void mark(Element element) {
+    element.markNeedsBuild();
+    element.visitChildren(mark);
+  }
+
+  (context as Element).visitChildren(mark);
 }
 
 /// app_config.dart 를 아직 안 채운 상태에서 뜨는 안내 화면
@@ -104,7 +150,7 @@ class _SetupNeededApp extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  Text(
                     '값 위치: Firebase 콘솔 → 프로젝트 설정(⚙️) → 내 앱 → firebaseConfig\n'
                     '자세한 건 02_Firebase설정가이드.md / 03_Cloudinary설정가이드.md 참고',
                     style: TextStyle(
@@ -120,7 +166,7 @@ class _SetupNeededApp extends StatelessWidget {
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: Text('Firebase 초기화 오류\n$error',
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 12, color: AppColors.danger, height: 1.5)),
                     ),
                   ],

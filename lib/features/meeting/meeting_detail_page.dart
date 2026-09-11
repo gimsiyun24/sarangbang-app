@@ -125,7 +125,7 @@ class MeetingDetailPage extends ConsumerWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text('사유: ${att[uid]!['reason']}',
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 12.5, color: AppColors.inkMuted)),
                   ),
                 ],
@@ -135,7 +135,7 @@ class MeetingDetailPage extends ConsumerWidget {
           SectionTitle('참석 현황',
               trailing: Text(
                   '${att.values.where((v) => v['status'] == 'present').length}명 참석',
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 12.5, color: AppColors.inkMuted))),
           SoftCard(
             child: Column(
@@ -277,7 +277,7 @@ class _StatusGroup extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('$label ${members.length}',
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 12.5,
                   fontWeight: FontWeight.w700,
                   color: AppColors.inkMuted)),

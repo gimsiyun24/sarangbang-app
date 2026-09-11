@@ -144,7 +144,7 @@ class _RoomCard extends StatelessWidget {
         duration: const Duration(milliseconds: 160),
         padding: const EdgeInsets.all(17),
         decoration: BoxDecoration(
-          color: selected ? AppColors.brand50 : Colors.white,
+          color: selected ? AppColors.brand50 : AppColors.surface,
           borderRadius: BorderRadius.circular(AppRadius.lg),
           border: Border.all(
             color: selected ? AppColors.brand : AppColors.line,

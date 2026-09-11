@@ -67,6 +67,10 @@ class AppConfig {
   static const String firebaseAppId = '1:1094696874902:web:192b787fdb6468bc3123b7';
   static const String firebaseStorageBucket = ''; // Storage 미사용 (사진은 Cloudinary)
 
+  /// 웹 푸시 인증서 공개 키 (Firebase 콘솔 → 프로젝트 설정 → 클라우드 메시징 → 웹 푸시 인증서).
+  /// 브라우저에 공개되는 값입니다. 비어 있으면 설정의 알림 켜기가 "아직 준비되지 않았어요"로 막힙니다.
+  static const String firebaseVapidKey = '';
+
   // ── Cloudinary (사진) ──────────────────────────────────────
   static const String cloudinaryCloudName = 'dqldsminx';
   static const String cloudinaryUploadPreset = 'sarangbang_std';

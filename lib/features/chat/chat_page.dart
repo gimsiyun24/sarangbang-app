@@ -177,7 +177,7 @@ class _Bubble extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
           decoration: BoxDecoration(
-            color: isMine ? AppColors.brand : Colors.white,
+            color: isMine ? AppColors.brand : AppColors.surface,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(isMine || !showHeader ? 16 : 4),
               topRight: Radius.circular(isMine && showHeader ? 4 : 16),
@@ -288,8 +288,8 @@ class _Composer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
-        decoration: const BoxDecoration(
-          color: Colors.white,
+        decoration: BoxDecoration(
+          color: AppColors.surface,
           border: Border(top: BorderSide(color: AppColors.line)),
         ),
         child: Row(

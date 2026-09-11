@@ -147,7 +147,7 @@ class _PrayerEditorState extends ConsumerState<_PrayerEditor> {
       children: [
         SheetHandle('${widget.week.mmdd} 내 기도제목',
             trailing: Text(widget.week.range,
-                style: const TextStyle(fontSize: 11.5, color: AppColors.inkMuted))),
+                style: TextStyle(fontSize: 11.5, color: AppColors.inkMuted))),
 
         const _Head('기도제목'),
         for (var i = 0; i < _topics.length; i++) _topicRow(i),
@@ -170,7 +170,7 @@ class _PrayerEditorState extends ConsumerState<_PrayerEditor> {
           child: Text(_busy ? '저장 중...' : '저장하기'),
         ),
         const SizedBox(height: 10),
-        const Text(
+        Text(
           '🔒 나만 보기로 둔 항목은 카톡 복사에도 들어가지 않고,\n보안 규칙에서 본인 외 아무도 읽을 수 없습니다.',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 11.5, color: AppColors.inkMuted, height: 1.6),
@@ -227,7 +227,7 @@ class _PrayerEditorState extends ConsumerState<_PrayerEditor> {
               const Spacer(),
               if (r.prayedBy.isNotEmpty)
                 Text('🙏 ${r.prayedBy.length}',
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: 12, color: AppColors.inkMuted)),
             ],
           ),

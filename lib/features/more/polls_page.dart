@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/providers.dart';
+import '../../core/push.dart';
 import '../../core/refs.dart';
 import '../../models/models.dart';
 import '../../shell.dart';
@@ -116,7 +117,7 @@ class _PollCard extends ConsumerWidget {
               if (poll.authorUid == uid)
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
-                  icon: const AppIcon(AppIcons.moreHoriz,
+                  icon: AppIcon(AppIcons.moreHoriz,
                       size: 18, color: AppColors.inkMuted),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
@@ -148,7 +149,7 @@ class _PollCard extends ConsumerWidget {
             const SizedBox(height: 4),
             Text(
                 '마감 ${DateFormat('M/d (E) a h:mm', 'ko_KR').format(poll.closesAt!)}',
-                style: const TextStyle(fontSize: 11.5, color: AppColors.inkMuted)),
+                style: TextStyle(fontSize: 11.5, color: AppColors.inkMuted)),
           ],
           const SizedBox(height: 14),
           for (final o in poll.options) ...[
@@ -166,7 +167,7 @@ class _PollCard extends ConsumerWidget {
           Row(
             children: [
               Text('${poll.voters.length}명 참여',
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 12, color: AppColors.inkMuted)),
               const Spacer(),
               TextButton.icon(
@@ -266,7 +267,7 @@ class _OptionBar extends StatelessWidget {
                           .map((u) => members[u]?.shortName ?? '?')
                           .take(3)
                           .join(','),
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 10.5, color: AppColors.inkMuted),
                     ),
                     const SizedBox(width: 6),
@@ -321,7 +322,7 @@ class _PollEditorState extends ConsumerState<_PollEditor> {
     setState(() => _busy = true);
     try {
       final uid = ref.read(myUidProvider)!;
-      await Refs.polls(widget.roomId).add({
+      final doc = await Refs.polls(widget.roomId).add({
         'question': _question.text.trim(),
         'options': [
           for (var i = 0; i < opts.length; i++)
@@ -333,6 +334,7 @@ class _PollEditorState extends ConsumerState<_PollEditor> {
         'authorUid': uid,
         'createdAt': FieldValue.serverTimestamp(),
       });
+      requestPush(PushKind.poll, roomId: widget.roomId, id: doc.id);
       if (mounted) Navigator.pop(context);
     } catch (e) {
       if (mounted) toast(context, '저장 실패: $e');
