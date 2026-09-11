@@ -38,6 +38,9 @@ class _SarangbangAppState extends State<SarangbangApp> {
   @override
   Widget build(BuildContext context) => MaterialApp.router(
         title: '사랑방 나눔',
+        // 웹에서는 이 색이 <meta name="theme-color"> 가 되어 폰 상단(상태바·주소창) 색을 정합니다.
+        // 안 주면 테마의 주 색(파랑)이 들어가므로 화면 바탕과 같은 회색으로 둡니다.
+        color: AppColors.canvas,
         debugShowCheckedModeBanner: false,
         theme: buildTheme(),
         routerConfig: _router,
