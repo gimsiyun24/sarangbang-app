@@ -29,7 +29,7 @@ class SettlementsPage extends ConsumerWidget {
       ],
       fab: FloatingActionButton.extended(
         onPressed: () => openSheet(context, _SettlementEditor(roomId: roomId)),
-        icon: const Icon(Icons.receipt_long_outlined),
+        icon: const AppIcon(AppIcons.receipt),
         label: const Text('정산 만들기'),
       ),
       body: async.when(
@@ -38,7 +38,7 @@ class SettlementsPage extends ConsumerWidget {
         data: (list) {
           if (list.isEmpty) {
             return const EmptyState(
-              emoji: '🧾',
+              icon: AppIcons.receipt,
               title: '정산 내역이 없어요',
               subtitle: '볼링·식비·유류비·MT 회비를 1/N로 계산하고\n누가 입금했는지 체크할 수 있어요.',
             );
@@ -99,7 +99,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
               if (s.authorUid == uid)
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
-                  icon: const Icon(Icons.more_horiz_rounded,
+                  icon: const AppIcon(AppIcons.moreHoriz,
                       size: 18, color: AppColors.inkMuted),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
@@ -177,7 +177,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(children: [
-                    const Icon(Icons.account_balance_outlined,
+                    const AppIcon(AppIcons.bank,
                         size: 16, color: AppColors.brand),
                     const SizedBox(width: 8),
                     Expanded(
@@ -187,7 +187,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
                               fontWeight: FontWeight.w700,
                               color: AppColors.brand)),
                     ),
-                    const Icon(Icons.copy_rounded,
+                    const AppIcon(AppIcons.copy,
                         size: 15, color: AppColors.brand),
                   ]),
                 ),
@@ -267,7 +267,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
                     onPressed: () => copyToClipboard(
                         context, _text(s, members),
                         message: '정산 내역을 복사했어요'),
-                    icon: const Icon(Icons.copy_rounded, size: 16),
+                    icon: const AppIcon(AppIcons.copy, size: 16),
                     label: const Text('카톡용 복사',
                         style: TextStyle(fontSize: 13)),
                   ),
@@ -283,7 +283,7 @@ class _SettlementCardState extends ConsumerState<_SettlementCard> {
                         '${s.account}',
                         message: '독촉(?) 문구를 복사했어요',
                       ),
-                      icon: const Icon(Icons.campaign_outlined, size: 16),
+                      icon: const AppIcon(AppIcons.megaphone, size: 16),
                       label: Text('미입금 ${unpaid.length}',
                           style: const TextStyle(fontSize: 13)),
                     ),
@@ -548,7 +548,7 @@ class _SettlementEditorState extends ConsumerState<_SettlementEditor> {
                         label: TextEditingController(),
                         amount: TextEditingController(),
                       ))),
-              icon: const Icon(Icons.add_rounded, size: 16),
+              icon: const AppIcon(AppIcons.plus, size: 16),
               label: const Text('추가', style: TextStyle(fontSize: 12.5)),
             ),
           ],
@@ -600,7 +600,7 @@ class _SettlementEditorState extends ConsumerState<_SettlementEditor> {
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.close_rounded, size: 18),
+                  icon: const AppIcon(AppIcons.close, size: 18),
                   onPressed: () => setState(() {
                     final e = _extras.removeAt(i);
                     e.label.dispose();

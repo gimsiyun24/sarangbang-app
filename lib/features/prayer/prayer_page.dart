@@ -30,7 +30,7 @@ class PrayerPage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => openPrayerEditor(context, ref, week: week),
-        icon: const Icon(Icons.edit_rounded),
+        icon: const AppIcon(AppIcons.pencil),
         label: const Text('내 기도제목 쓰기'),
       ),
       body: SafeArea(
@@ -78,7 +78,7 @@ class _WeekPicker extends ConsumerWidget {
           children: [
             Text(week.label,
                 style: AppText.label.copyWith(color: AppColors.brand)),
-            const Icon(Icons.expand_more_rounded,
+            const AppIcon(AppIcons.chevronDown,
                 size: 18, color: AppColors.brand),
           ],
         ),
@@ -122,7 +122,7 @@ class _WeekView extends ConsumerWidget {
             const SizedBox(height: 14),
             if (visible.isEmpty)
               EmptyState(
-                emoji: '🙏',
+                icon: AppIcons.heartHand,
                 title: '${week.mmdd} 주간, 아직 비어 있어요',
                 subtitle: '첫 번째로 기도제목을 남겨보세요.',
               )
@@ -192,7 +192,7 @@ class _SubmitBar extends ConsumerWidget {
                         week: week, entries: entries, members: members),
                     message: '카톡에 붙여넣기만 하면 돼요 📋',
                   ),
-                  icon: const Icon(Icons.copy_all_rounded, size: 18),
+                  icon: const AppIcon(AppIcons.copy, size: 18),
                   label: const Text('카톡용 복사'),
                 ),
               ),
@@ -200,7 +200,7 @@ class _SubmitBar extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: () => _showNotSubmitted(context),
-                  icon: const Icon(Icons.notifications_active_outlined, size: 18),
+                  icon: const AppIcon(AppIcons.bell, size: 18),
                   label: Text('미제출 ${notSubmitted.length}'),
                 ),
               ),
@@ -210,7 +210,7 @@ class _SubmitBar extends ConsumerWidget {
           Center(
             child: TextButton.icon(
               onPressed: () => _preview(context),
-              icon: const Icon(Icons.visibility_outlined, size: 15),
+              icon: const AppIcon(AppIcons.eye, size: 15),
               label: const Text('복사될 내용 미리보기'),
               style: TextButton.styleFrom(foregroundColor: AppColors.inkMuted),
             ),
@@ -243,7 +243,7 @@ class _SubmitBar extends ConsumerWidget {
               copyToClipboard(context, text);
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.copy_rounded, size: 18),
+            icon: const AppIcon(AppIcons.copy, size: 18),
             label: const Text('복사하기'),
           ),
           const SizedBox(height: 8),
@@ -262,7 +262,7 @@ class _SubmitBar extends ConsumerWidget {
         children: [
           SheetHandle('${week.mmdd} 아직 안 낸 사람'),
           if (notSubmitted.isEmpty)
-            const EmptyState(emoji: '🎉', title: '전원 제출 완료!')
+            const EmptyState(icon: AppIcons.checkCircle, title: '전원 제출 완료!')
           else ...[
             Wrap(
               spacing: 8,
@@ -285,7 +285,7 @@ class _SubmitBar extends ConsumerWidget {
                 );
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.campaign_outlined, size: 18),
+              icon: const AppIcon(AppIcons.megaphone, size: 18),
               label: const Text('콕 찌르기 문구 복사'),
             ),
           ],
@@ -347,7 +347,7 @@ class _PrayerCard extends ConsumerWidget {
               const Spacer(),
               if (isMine)
                 IconButton(
-                  icon: const Icon(Icons.edit_outlined, size: 18),
+                  icon: const AppIcon(AppIcons.pencil, size: 18),
                   onPressed: () => openPrayerEditor(context, ref, week: week),
                 ),
             ],
@@ -444,7 +444,7 @@ class _TopicRow extends ConsumerWidget {
               const Padding(
                 padding: EdgeInsets.only(top: 2),
                 child:
-                    Icon(Icons.lock_rounded, size: 12, color: AppColors.inkMuted),
+                    AppIcon(AppIcons.lock, size: 12, color: AppColors.inkMuted),
               ),
               const SizedBox(width: 5),
             ],

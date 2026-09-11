@@ -6,6 +6,8 @@ import '../../app_config.dart';
 import '../../core/providers.dart';
 import '../../core/refs.dart';
 import '../../theme.dart';
+import '../../widgets/app_icon.dart';
+import '../../widgets/app_icons.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -152,7 +154,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 height: 17,
                                 child: CircularProgressIndicator(
                                     strokeWidth: 2, color: Colors.white))
-                            : const Icon(Icons.g_mobiledata_rounded, size: 26),
+                            : const AppIcon(AppIcons.google, size: 20),
                         label: Text(_busy ? '로그인 중...' : 'Google 계정으로 시작하기'),
                       ),
                     ),
@@ -168,7 +170,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Icon(Icons.error_outline_rounded,
+                            const AppIcon(AppIcons.alertCircle,
                                 size: 16, color: AppColors.danger),
                             const SizedBox(width: 8),
                             Expanded(
@@ -184,7 +186,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.lock_outline_rounded,
+                        const AppIcon(AppIcons.lock,
                             size: 12, color: AppColors.inkFaint),
                         const SizedBox(width: 5),
                         Flexible(
@@ -210,15 +212,15 @@ class _Features extends StatelessWidget {
   const _Features();
 
   static const _items = [
-    ('🙏', '기도제목·신앙루틴', '매주 쌓이고, 카톡 포맷으로 한 번에 복사'),
-    ('📸', '사진 아카이브', '만료 없이 원본 그대로 보관'),
-    ('📋', '모임·출석·정산', '누가 왔고 누가 냈는지 기록으로'),
+    (AppIcons.heartHand, '기도제목·신앙루틴', '매주 쌓이고, 카톡 포맷으로 한 번에 복사'),
+    (AppIcons.image, '사진 아카이브', '만료 없이 원본 그대로 보관'),
+    (AppIcons.calendar, '모임·출석·정산', '누가 왔고 누가 냈는지 기록으로'),
   ];
 
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          for (final (emoji, title, desc) in _items)
+          for (final (icon, title, desc) in _items)
             Padding(
               padding: const EdgeInsets.only(bottom: 12),
               child: Row(
@@ -231,7 +233,7 @@ class _Features extends StatelessWidget {
                       borderRadius: BorderRadius.circular(13),
                     ),
                     alignment: Alignment.center,
-                    child: Text(emoji, style: const TextStyle(fontSize: 18)),
+                    child: AppIcon(icon, size: 22, color: AppColors.brand),
                   ),
                   const SizedBox(width: 12),
                   Expanded(

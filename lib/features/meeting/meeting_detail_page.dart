@@ -31,7 +31,7 @@ class MeetingDetailPage extends ConsumerWidget {
     if (meeting == null) {
       return const SubPage(
         title: '모임',
-        body: EmptyState(emoji: '🔍', title: '삭제되었거나 없는 모임이에요'),
+        body: EmptyState(icon: AppIcons.search, title: '삭제되었거나 없는 모임이에요'),
       );
     }
 
@@ -46,7 +46,7 @@ class MeetingDetailPage extends ConsumerWidget {
       actions: [
         if (meeting.authorUid == uid)
           PopupMenuButton<String>(
-            icon: const Icon(Icons.more_vert_rounded),
+            icon: const AppIcon(AppIcons.moreVert),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
             onSelected: (v) async {
               if (v == 'edit') {
@@ -141,10 +141,10 @@ class MeetingDetailPage extends ConsumerWidget {
             child: Column(
               children: [
                 for (final group in [
-                  (AttendStatus.present, '✅ 참석'),
-                  (AttendStatus.online, '💻 온라인'),
-                  (AttendStatus.absent, '🥲 불참'),
-                  (AttendStatus.none, '⬜ 미체크'),
+                  (AttendStatus.present, '참석'),
+                  (AttendStatus.online, '온라인'),
+                  (AttendStatus.absent, '불참'),
+                  (AttendStatus.none, '미체크'),
                 ])
                   _StatusGroup(
                     label: group.$2,
@@ -164,7 +164,7 @@ class MeetingDetailPage extends ConsumerWidget {
           const SizedBox(height: 20),
           OutlinedButton.icon(
             onPressed: () => context.go('/more/albums'),
-            icon: const Icon(Icons.photo_library_outlined, size: 18),
+            icon: const AppIcon(AppIcons.image, size: 18),
             label: const Text('이 모임 사진 앨범으로'),
           ),
         ],
@@ -222,11 +222,11 @@ class _StatusButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (emoji, color) = switch (status) {
-      AttendStatus.present => ('✅', AppColors.brand),
-      AttendStatus.online => ('💻', AppColors.violet),
-      AttendStatus.absent => ('🥲', AppColors.inkFaint),
-      AttendStatus.none => ('⬜', AppColors.inkMuted),
+    final (icon, color) = switch (status) {
+      AttendStatus.present => (AppIcons.checkCircle, AppColors.brand),
+      AttendStatus.online => (AppIcons.monitor, AppColors.violet),
+      AttendStatus.absent => (AppIcons.xCircle, AppColors.inkFaint),
+      AttendStatus.none => (AppIcons.circle, AppColors.inkMuted),
     };
     return InkWell(
       onTap: onTap,
@@ -242,7 +242,7 @@ class _StatusButton extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(emoji, style: const TextStyle(fontSize: 18)),
+            AppIcon(icon, size: 22, color: selected ? color : AppColors.inkMuted),
             const SizedBox(height: 4),
             Text(attendLabel(status),
                 style: TextStyle(

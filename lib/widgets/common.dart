@@ -3,6 +3,11 @@ import 'package:flutter/services.dart';
 
 import '../models/models.dart';
 import '../theme.dart';
+import 'app_icon.dart';
+import 'app_icons.dart';
+
+export 'app_icon.dart';
+export 'app_icons.dart';
 
 /// 화면 최대폭 — 웹에서 너무 넓어지지 않게 (애기애타 본문 폭과 같음)
 class Bounded extends StatelessWidget {
@@ -139,12 +144,13 @@ class Avatar extends StatelessWidget {
 
 /// 목록이 비었을 때 보여주는 안내. 애기애타처럼 동그라미 바탕 없이 가운데에 둡니다.
 class EmptyState extends StatelessWidget {
-  final String emoji, title;
+  final AppIconData? icon;
+  final String title;
   final String? subtitle;
   final Widget? action;
   const EmptyState({
     super.key,
-    this.emoji = '🍀',
+    this.icon,
     required this.title,
     this.subtitle,
     this.action,
@@ -157,8 +163,10 @@ class EmptyState extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(emoji, style: const TextStyle(fontSize: 34)),
-              const SizedBox(height: 12),
+              if (icon != null) ...[
+                AppIcon(icon!, size: 40, color: AppColors.brand300),
+                const SizedBox(height: 12),
+              ],
               Text(title,
                   textAlign: TextAlign.center,
                   style: AppText.bodyStrong.copyWith(color: AppColors.inkSoft)),
@@ -268,7 +276,7 @@ class ErrorNote extends StatelessWidget {
     final msg = error.toString();
     final permission = msg.contains('permission-denied');
     return EmptyState(
-      emoji: permission ? '🔒' : '⚠️',
+      icon: permission ? AppIcons.lock : AppIcons.alertCircle,
       title: permission ? '읽을 권한이 없어요' : '불러오지 못했어요',
       subtitle: permission
           ? 'Firestore 보안 규칙이 게시되었는지,\ngroups/nw2026 문서가 있는지 확인해주세요.'
@@ -298,7 +306,7 @@ class KV extends StatelessWidget {
 class Pill extends StatelessWidget {
   final String text;
   final Color? bg, fg;
-  final IconData? icon;
+  final AppIconData? icon;
   const Pill(this.text, {super.key, this.bg, this.fg, this.icon});
 
   @override
@@ -312,7 +320,7 @@ class Pill extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 12, color: fg ?? AppColors.brand),
+              AppIcon(icon!, size: 12, color: fg ?? AppColors.brand),
               const SizedBox(width: 4),
             ],
             Text(

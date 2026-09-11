@@ -103,7 +103,7 @@ class _AlbumDetailPageState extends ConsumerState<AlbumDetailPage> {
     if (albums == null) return const SubPage(title: '앨범', body: Loading());
     if (album == null) {
       return const SubPage(
-          title: '앨범', body: EmptyState(emoji: '🔍', title: '없는 앨범이에요'));
+          title: '앨범', body: EmptyState(icon: AppIcons.search, title: '없는 앨범이에요'));
     }
 
     return SubPage(
@@ -112,7 +112,7 @@ class _AlbumDetailPageState extends ConsumerState<AlbumDetailPage> {
       actions: [
         if (album.authorUid == uid)
           PopupMenuButton<String>(
-            icon: const Icon(Icons.more_vert_rounded),
+            icon: const AppIcon(AppIcons.moreVert),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
             onSelected: (v) async {
@@ -140,7 +140,7 @@ class _AlbumDetailPageState extends ConsumerState<AlbumDetailPage> {
           ? null
           : FloatingActionButton.extended(
               onPressed: _pickAndUpload,
-              icon: const Icon(Icons.add_photo_alternate_outlined),
+              icon: const AppIcon(AppIcons.imagePlus),
               label: const Text('사진 올리기'),
             ),
       body: Column(
@@ -186,7 +186,7 @@ class _AlbumDetailPageState extends ConsumerState<AlbumDetailPage> {
               data: (list) {
                 if (list.isEmpty) {
                   return const EmptyState(
-                    emoji: '🖼️',
+                    icon: AppIcons.image,
                     title: '아직 사진이 없어요',
                     subtitle: '아래 버튼으로 여러 장 한 번에 올릴 수 있어요.',
                   );
@@ -225,9 +225,17 @@ class _AlbumDetailPageState extends ConsumerState<AlbumDetailPage> {
                                 color: Colors.black.withValues(alpha: 0.45),
                                 borderRadius: BorderRadius.circular(99),
                               ),
-                              child: Text('❤️ ${list[i].likes.length}',
-                                  style: const TextStyle(
-                                      fontSize: 10, color: Colors.white)),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const AppIcon(AppIcons.heart,
+                                      filled: true, size: 10, color: Colors.white),
+                                  const SizedBox(width: 3),
+                                  Text('${list[i].likes.length}',
+                                      style: const TextStyle(
+                                          fontSize: 10, color: Colors.white)),
+                                ],
+                              ),
                             ),
                           ),
                       ],
@@ -338,7 +346,7 @@ class _PhotoViewerState extends ConsumerState<_PhotoViewer> {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.close_rounded, color: Colors.white),
+                      icon: const AppIcon(AppIcons.close, color: Colors.white),
                       onPressed: () => Navigator.pop(context),
                     ),
                     const Spacer(),
@@ -349,7 +357,7 @@ class _PhotoViewerState extends ConsumerState<_PhotoViewer> {
                     if (p.uploaderUid == uid)
                       IconButton(
                         tooltip: p.cancellable ? '완전 삭제' : '앱에서 숨기기',
-                        icon: const Icon(Icons.delete_outline_rounded,
+                        icon: const AppIcon(AppIcons.trash,
                             color: Colors.white),
                         onPressed: () async {
                           final ok = await confirm(
@@ -394,10 +402,9 @@ class _PhotoViewerState extends ConsumerState<_PhotoViewer> {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: Icon(
-                        p.likes.contains(uid)
-                            ? Icons.favorite_rounded
-                            : Icons.favorite_outline_rounded,
+                      icon: AppIcon(
+                        AppIcons.heart,
+                        filled: p.likes.contains(uid),
                         color: p.likes.contains(uid)
                             ? const Color(0xFFF06B7E)
                             : Colors.white,
@@ -418,7 +425,7 @@ class _PhotoViewerState extends ConsumerState<_PhotoViewer> {
                     const Spacer(),
                     IconButton(
                       tooltip: '원본 다운로드',
-                      icon: const Icon(Icons.download_rounded,
+                      icon: const AppIcon(AppIcons.download,
                           color: Colors.white),
                       onPressed: () => launchUrl(
                         Uri.parse(Cloudinary.download(p.publicId)),

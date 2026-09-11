@@ -61,7 +61,7 @@ class _RoomSelectPageState extends ConsumerState<RoomSelectPage> {
                         borderRadius: BorderRadius.circular(22),
                       ),
                       alignment: Alignment.center,
-                      child: const Text('🏡', style: TextStyle(fontSize: 30)),
+                      child: const AppIcon(AppIcons.home, size: 32, color: AppColors.brand),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -170,7 +170,7 @@ class _RoomCard extends StatelessWidget {
             AnimatedOpacity(
               duration: const Duration(milliseconds: 160),
               opacity: selected ? 1 : 0,
-              child: const Icon(Icons.check_circle_rounded,
+              child: const AppIcon(AppIcons.checkCircle,
                   color: AppColors.brand, size: 22),
             ),
           ],

@@ -28,7 +28,7 @@ class AdminPage extends ConsumerWidget {
       return const SubPage(
         title: '사랑방 관리',
         body: EmptyState(
-          emoji: '🔒',
+          icon: AppIcons.lock,
           title: '사랑방장만 볼 수 있어요',
           subtitle: 'Firebase 콘솔 → groups/nw2026 문서에\nleaderUid 필드로 본인 uid 를 넣으면 열립니다.',
         ),
@@ -64,7 +64,7 @@ class AdminPage extends ConsumerWidget {
                     buildNudgeText(week: week, notSubmitted: notSubmitted),
                     message: '콕 찌르기 문구를 복사했어요',
                   ),
-                  icon: const Icon(Icons.campaign_outlined, size: 18),
+                  icon: const AppIcon(AppIcons.megaphone, size: 18),
                   label: const Text('콕 찌르기 문구 복사'),
                 ),
                 const SizedBox(height: 8),
@@ -79,7 +79,7 @@ class AdminPage extends ConsumerWidget {
                         .set({'closed': true}, SetOptions(merge: true));
                     if (context.mounted) toast(context, '마감했어요');
                   },
-                  icon: const Icon(Icons.lock_clock_outlined, size: 18),
+                  icon: const AppIcon(AppIcons.lock, size: 18),
                   label: const Text('이 주차 마감 표시'),
                 ),
               ],
@@ -152,7 +152,7 @@ class _Check extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
         children: [
-          Icon(ok ? Icons.check_circle_rounded : Icons.error_outline_rounded,
+          AppIcon(ok ? AppIcons.checkCircle : AppIcons.alertCircle,
               size: 17, color: ok ? AppColors.brand : AppColors.danger),
           const SizedBox(width: 8),
           Text(label,

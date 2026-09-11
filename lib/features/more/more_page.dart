@@ -50,7 +50,7 @@ class MorePage extends ConsumerWidget {
                             Text(me?.display ?? '', style: AppText.cardTitle),
                             if (isLeader) ...[
                               const SizedBox(width: 6),
-                              const Pill('방장', icon: Icons.star_rounded),
+                              const Pill('방장', icon: AppIcons.star),
                             ],
                           ]),
                           const SizedBox(height: 4),
@@ -65,7 +65,7 @@ class MorePage extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    const Icon(Icons.chevron_right_rounded,
+                    const AppIcon(AppIcons.chevronRight,
                         color: AppColors.inkFaint),
                   ],
                 ),
@@ -90,23 +90,23 @@ class MorePage extends ConsumerWidget {
 
               const SectionTitle('기록'),
               _MenuCard(items: [
-                _MenuItem('📢', '공지 게시판', '/more/notices',
+                _MenuItem(AppIcons.megaphone, '공지 게시판', '/more/notices',
                     badge: unread > 0 ? '$unread' : null),
-                const _MenuItem('📸', '사진 앨범', '/more/albums'),
-                const _MenuItem('📖', '말씀 노트', '/more/notes'),
+                const _MenuItem(AppIcons.image, '사진 앨범', '/more/albums'),
+                const _MenuItem(AppIcons.book, '말씀 노트', '/more/notes'),
               ]),
 
               const SectionTitle('운영'),
               const _MenuCard(items: [
-                _MenuItem('🗳️', '투표 / 일정 조율', '/more/polls'),
-                _MenuItem('🧾', '정산 내역', '/more/settlements'),
-                _MenuItem('🎂', '멤버 · 생일', '/more/members'),
+                _MenuItem(AppIcons.voteStamp, '투표 / 일정 조율', '/more/polls'),
+                _MenuItem(AppIcons.receipt, '정산 내역', '/more/settlements'),
+                _MenuItem(AppIcons.cake, '멤버 · 생일', '/more/members'),
               ]),
 
               if (isLeader) ...[
                 const SectionTitle('관리자'),
                 const _MenuCard(items: [
-                  _MenuItem('⚙️', '사랑방 관리', '/more/admin'),
+                  _MenuItem(AppIcons.settings, '사랑방 관리', '/more/admin'),
                 ]),
               ],
 
@@ -118,7 +118,7 @@ class MorePage extends ConsumerWidget {
                         title: '로그아웃할까요?', ok: '로그아웃');
                     if (ok) await signOut();
                   },
-                  icon: const Icon(Icons.logout_rounded, size: 16),
+                  icon: const AppIcon(AppIcons.logout, size: 16),
                   label: const Text('로그아웃'),
                   style: TextButton.styleFrom(foregroundColor: AppColors.inkMuted),
                 ),
@@ -136,9 +136,10 @@ class MorePage extends ConsumerWidget {
 }
 
 class _MenuItem {
-  final String emoji, label, route;
+  final AppIconData icon;
+  final String label, route;
   final String? badge;
-  const _MenuItem(this.emoji, this.label, this.route, {this.badge});
+  const _MenuItem(this.icon, this.label, this.route, {this.badge});
 }
 
 class _MenuCard extends StatelessWidget {
@@ -158,7 +159,7 @@ class _MenuCard extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
                   child: Row(
                     children: [
-                      Text(items[i].emoji, style: const TextStyle(fontSize: 17)),
+                      AppIcon(items[i].icon, size: 22, color: AppColors.inkSoft),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(items[i].label,
@@ -182,7 +183,7 @@ class _MenuCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 8),
                       ],
-                      const Icon(Icons.chevron_right_rounded,
+                      const AppIcon(AppIcons.chevronRight,
                           size: 20, color: AppColors.inkFaint),
                     ],
                   ),

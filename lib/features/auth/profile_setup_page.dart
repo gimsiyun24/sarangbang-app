@@ -77,7 +77,7 @@ class _ProfileSetupPageState extends ConsumerState<ProfileSetupPage> {
                         borderRadius: BorderRadius.circular(22),
                       ),
                       alignment: Alignment.center,
-                      child: const Text('🤍', style: TextStyle(fontSize: 30)),
+                      child: const AppIcon(AppIcons.person, size: 32, color: AppColors.brand),
                     ),
                   ),
                   const SizedBox(height: 20),

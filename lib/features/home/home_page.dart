@@ -92,14 +92,14 @@ class _NextMeetingBanner extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(13),
                 ),
                 alignment: Alignment.center,
-                child: const Text('📅', style: TextStyle(fontSize: 18)),
+                child: const AppIcon(AppIcons.calendar, size: 22, color: AppColors.brand),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: Text('예정된 모임이 없어요. 일정을 등록해보세요.',
                     style: AppText.body.copyWith(fontSize: 13.5)),
               ),
-              const Icon(Icons.chevron_right_rounded,
+              const AppIcon(AppIcons.chevronRight,
                   color: AppColors.inkFaint, size: 20),
             ],
           ),
@@ -168,14 +168,14 @@ class _NextMeetingBanner extends ConsumerWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                Icon(Icons.schedule_rounded,
+                AppIcon(AppIcons.clock,
                     size: 13, color: Colors.white.withValues(alpha: 0.75)),
                 const SizedBox(width: 4),
                 Text(DateFormat('a h:mm', 'ko_KR').format(m.startAt),
                     style: _light),
                 if (m.place.isNotEmpty) ...[
                   const SizedBox(width: 12),
-                  Icon(Icons.place_outlined,
+                  AppIcon(AppIcons.pin,
                       size: 13, color: Colors.white.withValues(alpha: 0.75)),
                   const SizedBox(width: 3),
                   Flexible(
@@ -217,7 +217,7 @@ class _BirthdayBanner extends ConsumerWidget {
         onTap: () => context.go('/more/members'),
         child: Row(
           children: [
-            const Text('🎂', style: TextStyle(fontSize: 20)),
+            const AppIcon(AppIcons.cake, size: 24, color: AppColors.rose),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -235,7 +235,7 @@ class _BirthdayBanner extends ConsumerWidget {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right_rounded,
+            const AppIcon(AppIcons.chevronRight,
                 color: AppColors.rose, size: 20),
           ],
         ),
@@ -295,7 +295,7 @@ class _RoutineCard extends ConsumerWidget {
                     OutlinedButton.icon(
                       onPressed: () =>
                           openPrayerEditor(context, ref, week: week),
-                      icon: const Icon(Icons.add_rounded, size: 18),
+                      icon: const AppIcon(AppIcons.plus, size: 18),
                       label: const Text('루틴 정하기'),
                       style: OutlinedButton.styleFrom(
                           minimumSize: const Size(0, 44)),
@@ -373,7 +373,7 @@ class _RoutineRow extends StatelessWidget {
                       width: 1.7),
                 ),
                 child: checked
-                    ? const Icon(Icons.check_rounded,
+                    ? const AppIcon(AppIcons.check,
                         size: 15, color: Colors.white)
                     : null,
               ),
@@ -417,7 +417,7 @@ class _PrayerNudge extends ConsumerWidget {
         onTap: () => openPrayerEditor(context, ref, week: week),
         child: Row(
           children: [
-            const Text('🙏', style: TextStyle(fontSize: 20)),
+            const AppIcon(AppIcons.pencil, size: 22, color: AppColors.gold),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -431,7 +431,7 @@ class _PrayerNudge extends ConsumerWidget {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right_rounded,
+            const AppIcon(AppIcons.chevronRight,
                 color: AppColors.gold, size: 20),
           ],
         ),
@@ -466,7 +466,7 @@ class _PinnedNotices extends ConsumerWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('📌', style: TextStyle(fontSize: 15)),
+                const AppIcon(AppIcons.pushPin, size: 18, color: AppColors.brand),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Column(

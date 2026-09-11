@@ -28,7 +28,7 @@ class MeetingsPage extends ConsumerWidget {
           if (isLeader)
             IconButton(
               tooltip: '출석 통계',
-              icon: const Icon(Icons.insights_outlined),
+              icon: const AppIcon(AppIcons.chart),
               onPressed: () =>
                   openSheet(context, _AttendanceStats(roomId: roomId)),
             ),
@@ -40,7 +40,7 @@ class MeetingsPage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => openMeetingEditor(context, ref),
-        icon: const Icon(Icons.add_rounded),
+        icon: const AppIcon(AppIcons.plus),
         label: const Text('일정 등록'),
       ),
       body: SafeArea(
@@ -51,7 +51,7 @@ class MeetingsPage extends ConsumerWidget {
             data: (list) {
               if (list.isEmpty) {
                 return EmptyState(
-                  emoji: '📅',
+                  icon: AppIcons.calendar,
                   title:
                       '${AppConfig.roomOf(roomId).name}에 등록된 모임이 없어요',
                   subtitle: '주일 사랑방, 아웃팅, 수련회 일정을 등록해보세요.\n'
@@ -167,14 +167,14 @@ class _MeetingTile extends ConsumerWidget {
                   const SizedBox(height: 6),
                   Row(
                     children: [
-                      const Icon(Icons.schedule_rounded,
+                      const AppIcon(AppIcons.clock,
                           size: 12.5, color: AppColors.inkFaint),
                       const SizedBox(width: 4),
                       Text(DateFormat('a h:mm', 'ko_KR').format(meeting.startAt),
                           style: AppText.caption),
                       if (meeting.place.isNotEmpty) ...[
                         const SizedBox(width: 10),
-                        const Icon(Icons.place_outlined,
+                        const AppIcon(AppIcons.pin,
                             size: 12.5, color: AppColors.inkFaint),
                         const SizedBox(width: 3),
                         Flexible(
@@ -188,7 +188,7 @@ class _MeetingTile extends ConsumerWidget {
                   const SizedBox(height: 9),
                   Row(
                     children: [
-                      const Icon(Icons.groups_rounded,
+                      const AppIcon(AppIcons.users,
                           size: 13, color: AppColors.inkFaint),
                       const SizedBox(width: 4),
                       Text(
@@ -197,7 +197,7 @@ class _MeetingTile extends ConsumerWidget {
                               : '참석 $present명${online > 0 ? ' · 온라인 $online명' : ''}',
                           style: AppText.micro),
                       const Spacer(),
-                      const Icon(Icons.chevron_right_rounded,
+                      const AppIcon(AppIcons.chevronRight,
                           size: 18, color: AppColors.inkFaint),
                     ],
                   ),
@@ -460,13 +460,13 @@ class _AttendanceStatsState extends ConsumerState<_AttendanceStats> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SheetHandle('${AppConfig.roomOf(widget.roomId).name} 출석 통계',
-            trailing: const Pill('방장 전용', icon: Icons.lock_rounded)),
+            trailing: const Pill('방장 전용', icon: AppIcons.lock)),
         if (_error != null)
           Text(_error!, style: AppText.caption.copyWith(color: AppColors.danger))
         else if (_result == null)
           const Loading()
         else if (_result!.isEmpty)
-          const EmptyState(emoji: '📊', title: '아직 집계할 지난 모임이 없어요')
+          const EmptyState(icon: AppIcons.chart, title: '아직 집계할 지난 모임이 없어요')
         else
           for (final m in members)
             Builder(builder: (_) {

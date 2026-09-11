@@ -84,7 +84,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                   data: (msgs) {
                     if (msgs.isEmpty) {
                       return EmptyState(
-                        emoji: '💬',
+                        icon: AppIcons.chat,
                         title: '${room.name} 채팅이 비어 있어요',
                         subtitle: '첫 마디를 남겨보세요.\n'
                             '길게 남길 이야기는 공지나 말씀노트에 쓰면 안 묻힙니다.',
@@ -339,7 +339,7 @@ class _Composer extends StatelessWidget {
                         height: 16,
                         child: CircularProgressIndicator(
                             strokeWidth: 2, color: Colors.white))
-                    : const Icon(Icons.arrow_upward_rounded, size: 20),
+                    : const AppIcon(AppIcons.arrowUp, size: 20),
               ),
             ),
           ],

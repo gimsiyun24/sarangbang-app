@@ -46,30 +46,15 @@ class AppShell extends ConsumerWidget {
   }
 }
 
-typedef _Tab = ({IconData icon, IconData activeIcon, String label});
+typedef _Tab = ({AppIconData icon, String label});
 
+// 고른 탭은 속을 채운 모양(filled)으로 그립니다.
 const List<_Tab> _tabs = [
-  (icon: Icons.home_outlined, activeIcon: Icons.home_rounded, label: '홈'),
-  (
-    icon: Icons.volunteer_activism_outlined,
-    activeIcon: Icons.volunteer_activism_rounded,
-    label: '기도'
-  ),
-  (
-    icon: Icons.chat_bubble_outline_rounded,
-    activeIcon: Icons.chat_bubble_rounded,
-    label: '채팅'
-  ),
-  (
-    icon: Icons.calendar_month_outlined,
-    activeIcon: Icons.calendar_month_rounded,
-    label: '모임'
-  ),
-  (
-    icon: Icons.grid_view_outlined,
-    activeIcon: Icons.grid_view_rounded,
-    label: '더보기'
-  ),
+  (icon: AppIcons.home, label: '홈'),
+  (icon: AppIcons.heartHand, label: '기도'),
+  (icon: AppIcons.chat, label: '채팅'),
+  (icon: AppIcons.calendar, label: '모임'),
+  (icon: AppIcons.grid, label: '더보기'),
 ];
 
 /// 애기애타 앱의 하단 탭바 — 화면 아래에 떠 있는 가로로 긴 알약.
@@ -309,7 +294,7 @@ class _TabItem extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(lit ? tab.activeIcon : tab.icon, size: 27, color: color),
+              AppIcon(tab.icon, filled: lit, size: 27, color: color),
               const SizedBox(height: 1),
               Text(
                 tab.label,
@@ -351,7 +336,7 @@ class SubPage extends StatelessWidget {
           titleSpacing: 0,
           leadingWidth: 56,
           leading: IconButton(
-            icon: const Icon(Icons.chevron_left_rounded,
+            icon: const AppIcon(AppIcons.chevronLeft,
                 size: 30, color: AppColors.ink),
             onPressed: () => context.canPop()
                 ? context.pop()

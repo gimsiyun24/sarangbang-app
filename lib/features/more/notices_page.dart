@@ -29,7 +29,7 @@ class NoticesPage extends ConsumerWidget {
       ],
       fab: FloatingActionButton.extended(
         onPressed: () => openSheet(context, _NoticeEditor(roomId: roomId)),
-        icon: const Icon(Icons.edit_rounded),
+        icon: const AppIcon(AppIcons.pencil),
         label: const Text('공지 쓰기'),
       ),
       body: async.when(
@@ -38,7 +38,7 @@ class NoticesPage extends ConsumerWidget {
         data: (list) {
           if (list.isEmpty) {
             return const EmptyState(
-              emoji: '📢',
+              icon: AppIcons.megaphone,
               title: '아직 공지가 없어요',
               subtitle: '수련회·MT·아웃팅 공지를 여기에 올리면\n잡담에 묻히지 않습니다.',
             );
@@ -94,7 +94,7 @@ class _NoticeCardState extends ConsumerState<_NoticeCard> {
           Row(
             children: [
               if (n.pinned) ...[
-                const Text('📌', style: TextStyle(fontSize: 14)),
+                const AppIcon(AppIcons.pushPin, size: 17, color: AppColors.brand),
                 const SizedBox(width: 6),
               ],
               Expanded(
@@ -105,7 +105,7 @@ class _NoticeCardState extends ConsumerState<_NoticeCard> {
               if (n.authorUid == uid)
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
-                  icon: const Icon(Icons.more_horiz_rounded,
+                  icon: const AppIcon(AppIcons.moreHoriz,
                       size: 18, color: AppColors.inkMuted),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
@@ -173,7 +173,7 @@ class _NoticeCardState extends ConsumerState<_NoticeCard> {
                   child: OutlinedButton.icon(
                     onPressed: () => copyToClipboard(
                         context, '${n.title}\n\n${n.body}'),
-                    icon: const Icon(Icons.copy_rounded, size: 16),
+                    icon: const AppIcon(AppIcons.copy, size: 16),
                     label: const Text('내용 복사', style: TextStyle(fontSize: 13)),
                   ),
                 ),
@@ -201,7 +201,7 @@ class _NoticeCardState extends ConsumerState<_NoticeCard> {
                           ],
                         ),
                       ),
-                      icon: const Icon(Icons.visibility_off_outlined, size: 16),
+                      icon: const AppIcon(AppIcons.eyeOff, size: 16),
                       label: Text('안 읽음 ${unreadMembers.length}',
                           style: const TextStyle(fontSize: 13)),
                     ),

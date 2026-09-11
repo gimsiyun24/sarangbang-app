@@ -35,7 +35,7 @@ class RoomSwitchChip extends ConsumerWidget {
                   fontSize: 13, color: AppColors.brand),
             ),
             if (rooms.length >= 2)
-              const Icon(Icons.unfold_more_rounded,
+              const AppIcon(AppIcons.chevronUpDown,
                   size: 15, color: AppColors.brand),
           ],
         ),
@@ -115,7 +115,7 @@ class _RoomRow extends StatelessWidget {
                 ),
               ),
               if (selected)
-                const Icon(Icons.check_circle_rounded,
+                const AppIcon(AppIcons.checkCircle,
                     color: AppColors.brand, size: 21),
             ],
           ),

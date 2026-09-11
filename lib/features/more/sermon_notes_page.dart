@@ -36,7 +36,7 @@ class _SermonNotesPageState extends ConsumerState<SermonNotesPage> {
       ],
       fab: FloatingActionButton.extended(
         onPressed: () => openSheet(context, _NoteEditor(roomId: roomId)),
-        icon: const Icon(Icons.edit_note_rounded),
+        icon: const AppIcon(AppIcons.pencil),
         label: const Text('노트 쓰기'),
       ),
       body: async.when(
@@ -63,14 +63,14 @@ class _SermonNotesPageState extends ConsumerState<SermonNotesPage> {
                   onChanged: (v) => setState(() => _query = v),
                   decoration: const InputDecoration(
                     hintText: '제목 · 본문 · 태그로 검색 (예: 예레미야)',
-                    prefixIcon: Icon(Icons.search_rounded, size: 20),
+                    prefixIcon: AppIcon(AppIcons.search, size: 20),
                   ),
                 ),
               ),
               Expanded(
                 child: list.isEmpty
                     ? EmptyState(
-                        emoji: '📖',
+                        icon: AppIcons.book,
                         title: q.isEmpty ? '아직 노트가 없어요' : '검색 결과가 없어요',
                         subtitle: q.isEmpty
                             ? '주일·수요예배 설교 요약과 묵상을 남겨보세요.\n태그를 달면 나중에 찾기 쉬워요.'
@@ -128,7 +128,7 @@ class _NoteCard extends ConsumerWidget {
               if (note.authorUid == uid)
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
-                  icon: const Icon(Icons.more_horiz_rounded,
+                  icon: const AppIcon(AppIcons.moreHoriz,
                       size: 18, color: AppColors.inkMuted),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),

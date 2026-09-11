@@ -119,7 +119,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
                               height: 14,
                               child: CircularProgressIndicator(
                                   strokeWidth: 2, color: Colors.white))
-                          : const Icon(Icons.camera_alt_rounded,
+                          : const AppIcon(AppIcons.camera,
                               size: 14, color: Colors.white),
                     ),
                   ),

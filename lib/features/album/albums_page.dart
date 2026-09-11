@@ -39,7 +39,7 @@ class AlbumsPage extends ConsumerWidget {
       ],
       fab: FloatingActionButton.extended(
         onPressed: () => openAlbumEditor(context, ref),
-        icon: const Icon(Icons.create_new_folder_outlined),
+        icon: const AppIcon(AppIcons.folderPlus),
         label: const Text('앨범 만들기'),
       ),
       body: async.when(
@@ -48,7 +48,7 @@ class AlbumsPage extends ConsumerWidget {
         data: (list) {
           if (list.isEmpty) {
             return EmptyState(
-              emoji: '📸',
+              icon: AppIcons.image,
               title: '${AppConfig.roomOf(roomId).name}에 앨범이 없어요',
               subtitle: '모임·아웃팅·수련회별로 앨범을 만들어 두면\n'
                   '1년치 사진이 만료 없이 남습니다.',
@@ -94,7 +94,7 @@ class _AlbumTile extends StatelessWidget {
                 Container(
                   color: AppColors.brand50,
                   alignment: Alignment.center,
-                  child: const Text('🍀', style: TextStyle(fontSize: 30)),
+                  child: const AppIcon(AppIcons.image, size: 32, color: AppColors.brand300),
                 )
               else
                 Image.network(

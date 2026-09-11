@@ -27,9 +27,7 @@ class _MembersPageState extends ConsumerState<MembersPage> {
       actions: [
         IconButton(
           tooltip: _byBirthday ? '이름순 보기' : '생일순 보기',
-          icon: Icon(_byBirthday
-              ? Icons.sort_by_alpha_rounded
-              : Icons.cake_outlined),
+          icon: AppIcon(_byBirthday ? AppIcons.sort : AppIcons.cake),
           onPressed: () => setState(() => _byBirthday = !_byBirthday),
         ),
       ],
@@ -38,7 +36,7 @@ class _MembersPageState extends ConsumerState<MembersPage> {
         error: (e, _) => ErrorNote(e),
         data: (members) {
           if (members.isEmpty) {
-            return const EmptyState(emoji: '👋', title: '아직 멤버가 없어요');
+            return const EmptyState(icon: AppIcons.users, title: '아직 멤버가 없어요');
           }
           if (!_byBirthday) {
             return ListView(
@@ -68,7 +66,7 @@ class _MembersPageState extends ConsumerState<MembersPage> {
                 if (withBd.any((m) => m.birthMonth == mm)) ...[
                   SectionTitle('$mm월',
                       trailing: mm == thisMonth
-                          ? const Pill('이번 달', icon: Icons.celebration_rounded)
+                          ? const Pill('이번 달', icon: AppIcons.gift)
                           : null),
                   for (final m in withBd.where((m) => m.birthMonth == mm)) ...[
                     _MemberTile(member: m, showBirthday: true),
@@ -127,7 +125,7 @@ class _MemberTile extends ConsumerWidget {
                     ],
                     if (isToday) ...[
                       const SizedBox(width: 6),
-                      const Text('🎂', style: TextStyle(fontSize: 15)),
+                      const AppIcon(AppIcons.cake, size: 18, color: AppColors.rose),
                     ],
                   ],
                 ),
@@ -251,7 +249,7 @@ class _RollingPaperState extends ConsumerState<_RollingPaper> {
             final docs = snap.data!.docs;
             if (docs.isEmpty) {
               return const EmptyState(
-                emoji: '💌',
+                icon: AppIcons.mail,
                 title: '아직 메시지가 없어요',
                 subtitle: '첫 번째 축하를 남겨보세요.',
               );
@@ -265,7 +263,7 @@ class _RollingPaperState extends ConsumerState<_RollingPaper> {
                 ),
                 child: Column(
                   children: [
-                    const Text('🎁', style: TextStyle(fontSize: 30)),
+                    const AppIcon(AppIcons.gift, size: 34, color: AppColors.rose),
                     const SizedBox(height: 8),
                     Text('${docs.length}개의 축하가 모였어요',
                         style: const TextStyle(
@@ -322,7 +320,7 @@ class _RollingPaperState extends ConsumerState<_RollingPaper> {
         const SizedBox(height: 10),
         FilledButton.icon(
           onPressed: _busy ? null : _send,
-          icon: const Icon(Icons.send_rounded, size: 18),
+          icon: const AppIcon(AppIcons.send, size: 18),
           label: Text(_busy ? '보내는 중...' : '남기기'),
         ),
       ],

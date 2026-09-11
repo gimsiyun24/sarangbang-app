@@ -29,7 +29,7 @@ class PollsPage extends ConsumerWidget {
       ],
       fab: FloatingActionButton.extended(
         onPressed: () => openSheet(context, _PollEditor(roomId: roomId)),
-        icon: const Icon(Icons.how_to_vote_outlined),
+        icon: const AppIcon(AppIcons.voteStamp),
         label: const Text('투표 만들기'),
       ),
       body: async.when(
@@ -38,7 +38,7 @@ class PollsPage extends ConsumerWidget {
         data: (list) {
           if (list.isEmpty) {
             return const EmptyState(
-              emoji: '🗳️',
+              icon: AppIcons.voteStamp,
               title: '아직 투표가 없어요',
               subtitle: '아웃팅 장소·날짜를 정할 때 써보세요.\n카톡 투표와 달리 결과가 영구 보존됩니다.',
             );
@@ -116,7 +116,7 @@ class _PollCard extends ConsumerWidget {
               if (poll.authorUid == uid)
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
-                  icon: const Icon(Icons.more_horiz_rounded,
+                  icon: const AppIcon(AppIcons.moreHoriz,
                       size: 18, color: AppColors.inkMuted),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
@@ -175,7 +175,7 @@ class _PollCard extends ConsumerWidget {
                   _resultText(poll, members),
                   message: '결과를 복사했어요',
                 ),
-                icon: const Icon(Icons.copy_rounded, size: 15),
+                icon: const AppIcon(AppIcons.copy, size: 15),
                 label: const Text('결과 복사', style: TextStyle(fontSize: 12)),
               ),
             ],
@@ -247,10 +247,8 @@ class _OptionBar extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: Row(
                 children: [
-                  Icon(
-                    mine
-                        ? Icons.check_circle_rounded
-                        : Icons.radio_button_unchecked_rounded,
+                  AppIcon(
+                    mine ? AppIcons.checkCircle : AppIcons.circle,
                     size: 17,
                     color: mine ? AppColors.brand : AppColors.lineStrong,
                   ),
@@ -363,7 +361,7 @@ class _PollEditorState extends ConsumerState<_PollEditor> {
                   hintText: '선택지 ${i + 1}',
                   suffixIcon: _options.length > 2
                       ? IconButton(
-                          icon: const Icon(Icons.close_rounded, size: 18),
+                          icon: const AppIcon(AppIcons.close, size: 18),
                           onPressed: () =>
                               setState(() => _options.removeAt(i).dispose()),
                         )
@@ -376,7 +374,7 @@ class _PollEditorState extends ConsumerState<_PollEditor> {
             child: TextButton.icon(
               onPressed: () =>
                   setState(() => _options.add(TextEditingController())),
-              icon: const Icon(Icons.add_rounded, size: 18),
+              icon: const AppIcon(AppIcons.plus, size: 18),
               label: const Text('선택지 추가', style: TextStyle(fontSize: 13)),
             ),
           ),

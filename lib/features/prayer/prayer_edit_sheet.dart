@@ -197,7 +197,7 @@ class _PrayerEditorState extends ConsumerState<_PrayerEditor> {
                     hintText: '예: 이번 학기 잘 마칠 수 있도록',
                     suffixIcon: _topics.length > 1
                         ? IconButton(
-                            icon: const Icon(Icons.close_rounded, size: 18),
+                            icon: const AppIcon(AppIcons.close, size: 18),
                             onPressed: () => setState(() {
                               _topics.removeAt(i).ctrl.dispose();
                             }),
@@ -213,14 +213,14 @@ class _PrayerEditorState extends ConsumerState<_PrayerEditor> {
             children: [
               _VisChip(
                 selected: r.vis == Vis.all,
-                icon: Icons.groups_rounded,
+                icon: AppIcons.users,
                 label: '전체 공개',
                 onTap: () => setState(() => r.vis = Vis.all),
               ),
               const SizedBox(width: 6),
               _VisChip(
                 selected: r.vis == Vis.private,
-                icon: Icons.lock_rounded,
+                icon: AppIcons.lock,
                 label: '나만 보기',
                 onTap: () => setState(() => r.vis = Vis.private),
               ),
@@ -244,7 +244,7 @@ class _PrayerEditorState extends ConsumerState<_PrayerEditor> {
             hintText: '예: 매일 감사기도 드리기',
             suffixIcon: _routines.length > 1
                 ? IconButton(
-                    icon: const Icon(Icons.close_rounded, size: 18),
+                    icon: const AppIcon(AppIcons.close, size: 18),
                     onPressed: () =>
                         setState(() => _routines.removeAt(i).dispose()),
                   )
@@ -275,7 +275,7 @@ class _AddButton extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: TextButton.icon(
           onPressed: onTap,
-          icon: const Icon(Icons.add_rounded, size: 18),
+          icon: const AppIcon(AppIcons.plus, size: 18),
           label: Text(label, style: const TextStyle(fontSize: 13)),
         ),
       );
@@ -283,7 +283,7 @@ class _AddButton extends StatelessWidget {
 
 class _VisChip extends StatelessWidget {
   final bool selected;
-  final IconData icon;
+  final AppIconData icon;
   final String label;
   final VoidCallback onTap;
   const _VisChip({
@@ -306,7 +306,7 @@ class _VisChip extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon,
+              AppIcon(icon,
                   size: 13,
                   color: selected ? Colors.white : AppColors.inkMuted),
               const SizedBox(width: 5),
