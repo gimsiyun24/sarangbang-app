@@ -28,7 +28,11 @@ class AppConfig {
   AppConfig._();
 
   // ── 청년부 (고정) ───────────────────────────────────────────
-  static const String groupId = 'nw2026';
+  /// Firestore 최상위 경로 `groups/{groupId}`. 배포 빌드는 늘 `nw2026` 입니다.
+  /// 테스트할 때만 `--dart-define=GROUP_ID=nw2026-test` 로 띄우면
+  /// 멤버들의 실제 기록과 섞이지 않는 별도 공간에 씁니다 (규칙은 {gid} 공통이라 그대로).
+  static const String groupId =
+      String.fromEnvironment('GROUP_ID', defaultValue: 'nw2026');
   static const String groupName = '2026 뉴웨이브';
 
   // ── 사랑방 목록 ────────────────────────────────────────────
