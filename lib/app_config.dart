@@ -34,6 +34,9 @@ class AppConfig {
       String.fromEnvironment('GROUP_ID', defaultValue: 'nw2026');
   static const String groupName = '2026 뉴웨이브';
 
+  /// 홈 화면 맨 위 제목
+  static const String homeTitle = '할렐루야 사랑방';
+
   // ── 사랑방 목록 ────────────────────────────────────────────
   /// 이름을 바꾸고 싶으면 여기만 고치면 됩니다. `id` 는 절대 바꾸지 마세요
   /// (id 가 Firestore 경로라, 바꾸면 기존 기록이 안 보입니다).

@@ -20,15 +20,13 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final me = ref.watch(myMemberProvider);
-
     return Scaffold(
       body: SafeArea(
         child: Bounded(
           child: ListView(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 36),
             children: [
-              _Greeting(name: me?.display ?? ''),
+              const _HomeTitle(),
               const SizedBox(height: 14),
               const Align(
                   alignment: Alignment.centerLeft, child: RoomSwitchChip()),
@@ -49,16 +47,19 @@ class HomePage extends ConsumerWidget {
   }
 }
 
-class _Greeting extends StatelessWidget {
-  final String name;
-  const _Greeting({required this.name});
+/// 홈 맨 위 제목 — 사랑방 이름 (AppConfig.homeTitle)
+class _HomeTitle extends StatelessWidget {
+  const _HomeTitle();
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
-          child: Text('$name님', style: AppText.display.copyWith(fontSize: 23)),
+          child: Text(AppConfig.homeTitle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppText.display.copyWith(fontSize: 23)),
         ),
         // 알림·내 프로필·설정 — 애기애타와 같이 모든 탭 제목 줄 오른쪽에 있습니다.
         // 맨 오른쪽 단추의 빈 여백만큼 4px 당겨 카드 끝과 맞춥니다.
