@@ -23,6 +23,12 @@ import 'features/more/settings_page.dart';
 import 'features/more/settlements_page.dart';
 import 'features/prayer/prayer_page.dart';
 import 'shell.dart';
+import 'widgets/swipe_back.dart';
+
+/// `<` 가 있는 화면(SubPage) 은 모두 이걸로 엽니다 — 오른쪽으로 밀면 앞 화면으로 돌아갑니다.
+/// 탭 화면 5개는 돌아갈 앞 화면이 없으므로 그대로 둡니다.
+Page<dynamic> _sub(GoRouterState state, Widget child) =>
+    SwipeBackPage<dynamic>(key: state.pageKey, name: state.name, child: child);
 
 /// FirebaseAuth 스트림을 go_router 의 refreshListenable 로 연결
 class _AuthRefresh extends ChangeNotifier {
@@ -60,9 +66,9 @@ GoRouter buildRouter() {
       // 탭 위로 올라오고(push), 뒤로 가면 원래 있던 탭으로 돌아갑니다.
       GoRoute(
           path: '/notifications',
-          builder: (c, s) => const NotificationsPage()),
-      GoRoute(path: '/profile', builder: (c, s) => const ProfilePage()),
-      GoRoute(path: '/settings', builder: (c, s) => const SettingsPage()),
+          pageBuilder: (c, s) => _sub(s, const NotificationsPage())),
+      GoRoute(path: '/profile', pageBuilder: (c, s) => _sub(s, const ProfilePage())),
+      GoRoute(path: '/settings', pageBuilder: (c, s) => _sub(s, const SettingsPage())),
       StatefulShellRoute.indexedStack(
         builder: (c, s, navShell) => AppShell(shell: navShell),
         branches: [
@@ -82,9 +88,12 @@ GoRouter buildRouter() {
               routes: [
                 GoRoute(
                   path: ':roomId/:id',
-                  builder: (c, s) => MeetingDetailPage(
-                    roomId: s.pathParameters['roomId']!,
-                    meetingId: s.pathParameters['id']!,
+                  pageBuilder: (c, s) => _sub(
+                    s,
+                    MeetingDetailPage(
+                      roomId: s.pathParameters['roomId']!,
+                      meetingId: s.pathParameters['id']!,
+                    ),
                   ),
                 ),
               ],
@@ -97,26 +106,33 @@ GoRouter buildRouter() {
               routes: [
                 GoRoute(
                   path: 'albums',
-                  builder: (c, s) => const AlbumsPage(),
+                  pageBuilder: (c, s) => _sub(s, const AlbumsPage()),
                   routes: [
                     GoRoute(
                       path: ':roomId/:id',
-                      builder: (c, s) => AlbumDetailPage(
-                        roomId: s.pathParameters['roomId']!,
-                        albumId: s.pathParameters['id']!,
+                      pageBuilder: (c, s) => _sub(
+                        s,
+                        AlbumDetailPage(
+                          roomId: s.pathParameters['roomId']!,
+                          albumId: s.pathParameters['id']!,
+                        ),
                       ),
                     ),
                   ],
                 ),
-                GoRoute(path: 'notices', builder: (c, s) => const NoticesPage()),
-                GoRoute(path: 'notes', builder: (c, s) => const SermonNotesPage()),
-                GoRoute(path: 'members', builder: (c, s) => const MembersPage()),
-                GoRoute(path: 'polls', builder: (c, s) => const PollsPage()),
+                GoRoute(
+                    path: 'notices', pageBuilder: (c, s) => _sub(s, const NoticesPage())),
+                GoRoute(
+                    path: 'notes', pageBuilder: (c, s) => _sub(s, const SermonNotesPage())),
+                GoRoute(
+                    path: 'members', pageBuilder: (c, s) => _sub(s, const MembersPage())),
+                GoRoute(path: 'polls', pageBuilder: (c, s) => _sub(s, const PollsPage())),
                 GoRoute(
                     path: 'settlements',
-                    builder: (c, s) => const SettlementsPage()),
-                GoRoute(path: 'profile', builder: (c, s) => const ProfilePage()),
-                GoRoute(path: 'admin', builder: (c, s) => const AdminPage()),
+                    pageBuilder: (c, s) => _sub(s, const SettlementsPage())),
+                GoRoute(
+                    path: 'profile', pageBuilder: (c, s) => _sub(s, const ProfilePage())),
+                GoRoute(path: 'admin', pageBuilder: (c, s) => _sub(s, const AdminPage())),
               ],
             ),
           ]),

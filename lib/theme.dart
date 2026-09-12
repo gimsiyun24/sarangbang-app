@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart' show CupertinoPageTransitionsBuilder;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -427,12 +428,17 @@ ThemeData buildTheme() {
       trackOutlineColor: WidgetStateProperty.all(Colors.transparent),
     ),
 
+    // 하위 화면(`<` 가 있는 화면)은 오른쪽에서 미끄러져 들어오고, 덮인 앞 화면은 왼쪽으로
+    // 조금 물러납니다. **오른쪽으로 밀어서 돌아가는 손짓**(widgets/swipe_back.dart)이
+    // 이 애니메이션을 손가락으로 직접 미는 방식이라, 가로로 미끄러지는 전환이어야
+    // 화면이 손을 따라옵니다. 예전 FadeForwards(흐려지며 바뀜)로는 따라갈 수 없습니다.
+    // 폰 기종에 따라 다르게 보이지 않도록 모든 플랫폼에 같은 값을 둡니다.
     pageTransitionsTheme: const PageTransitionsTheme(builders: {
-      TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
-      TargetPlatform.iOS: FadeForwardsPageTransitionsBuilder(),
-      TargetPlatform.macOS: FadeForwardsPageTransitionsBuilder(),
-      TargetPlatform.windows: FadeForwardsPageTransitionsBuilder(),
-      TargetPlatform.linux: FadeForwardsPageTransitionsBuilder(),
+      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.linux: CupertinoPageTransitionsBuilder(),
     }),
   );
 }
