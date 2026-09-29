@@ -139,6 +139,7 @@ groups/nw2026                          ← 청년부 1개 고정. 그룹 선택 
 | `netlify.toml` 에 `Cross-Origin-Opener-Policy` 추가 | 구글 로그인 팝업(`signInWithPopup`)이 막혀 로그인이 통째로 죽습니다 |
 | `_redirects` / redirects 규칙 삭제 | SPA 라우팅이 깨져 새로고침하면 404 |
 | `build.sh` 를 CRLF 로 저장 | 리눅스 빌드가 `$'\r': command not found` 로 실패. `.gitattributes` 가 막고 있습니다 |
+| **비밀값 커밋** | 이 저장소는 **공개(Public)** 입니다. 서비스 계정 JSON·토큰·비밀번호는 절대 커밋하지 마세요. 배포용 비밀값은 Netlify 환경변수에만 (`FIREBASE_SERVICE_ACCOUNT`) |
 | 개인정보 파일 커밋 | 카톡 원본 로그(`사랑방 톡 내용.txt`) 등은 **일부러 저장소 밖**에 둡니다. 실명 대화라 올리면 안 됩니다 |
 | `firestore.rules` 를 고치고 "반영됐다"고 보고 | 콘솔에서 게시해야 실제로 적용됩니다 |
 
@@ -152,8 +153,9 @@ groups/nw2026                          ← 청년부 1개 고정. 그룹 선택 
 - ⬜ Firebase Authentication → 승인된 도메인에 배포 주소 추가 ⚠️
 - ⬜ 첫 로그인 후 `groups/nw2026` 에 `leaderUid` 넣기 (관리자 메뉴가 이걸로 열립니다)
 
-**알려진 보안 구멍** — 고칠 가치가 있습니다.
-[firestore.rules](firestore.rules) 에서 공지·투표·정산·사진의 `update` 가 `signedIn()` 만 요구합니다. "읽음 표시 / 투표하기 / 입금완료 체크"를 허용하려고 연 건데 **필드 단위 제한이 없어서, 로그인한 사람이면 남의 공지 본문이나 정산 금액까지 덮어쓸 수 있습니다.** 손보려면 `request.resource.data.diff(resource.data).affectedKeys()` 로 바꿀 수 있는 필드를 제한하세요.
+**보안 — 2026-09-29 에 한 번 조였습니다.**
+공지·투표·정산·사진의 `update` 가 예전에는 `signedIn()` 만 요구해서, 로그인한 사람이면 남의 공지 본문이나 정산 금액까지 덮어쓸 수 있었습니다. 지금은 `onlyFields()` 헬퍼로 **작성자는 전부, 남은 정해진 필드만** 바꿀 수 있습니다 (공지 `readBy`, 투표 `options`, 정산 `paid`, 사진 `likes`·`hidden`).
+⚠️ **규칙을 고쳤으면 Firebase 콘솔에 붙여넣고 게시해야 실제로 적용됩니다.** 파일만 고치고 "막았다"고 생각하지 마세요.
 
 참고로 이 앱은 **승인 절차가 없습니다** (구글 로그인 = 멤버). 외부인을 막으려면 `groups/nw2026` 문서의 `joinCode` 필드에 초대코드를 넣으면 로그인 시 코드를 묻습니다 ([login_page.dart:60](lib/features/auth/login_page.dart:60)).
 
